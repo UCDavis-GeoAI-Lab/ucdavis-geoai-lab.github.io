@@ -13,3 +13,4 @@ This directory contains all static assets used in the course website and materia
 
 All assets should be organized by type and purpose. Use descriptive filenames and maintain a consistent naming convention.
 
+

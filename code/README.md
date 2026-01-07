@@ -13,3 +13,4 @@ This directory contains all code examples, scripts, and programming materials fo
 
 Code is organized by week and topic. Each week's code should be in its respective subdirectory.
 
+

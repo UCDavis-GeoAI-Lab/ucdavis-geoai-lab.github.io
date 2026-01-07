@@ -19,3 +19,4 @@ python/
 - For notebooks: `week01_lab01_introduction.ipynb`
 - Use underscores for separation, lowercase letters
 
+

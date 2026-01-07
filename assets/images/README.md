@@ -9,3 +9,4 @@ Course-related images, diagrams, screenshots, and visual materials.
 - `maps/` - GIS maps and spatial visualizations
 - `photos/` - Course-related photographs
 
+

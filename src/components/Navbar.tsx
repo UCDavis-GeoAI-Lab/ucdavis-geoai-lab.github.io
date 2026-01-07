@@ -17,13 +17,23 @@ const Navbar = () => {
     setShowWeeksMenu(!showWeeksMenu)
   }
 
-  const handleWeekSelect = (weekNumber: number) => {
+  const handleWeekSelect = (weekNumber: number, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     const isLocked = weekNumber > 1
     if (!isLocked) {
-      navigate(`/week/${weekNumber}`)
+      // Close menus first, then navigate
+      setShowWeeksMenu(false)
+      setIsOpen(false)
+      // Use setTimeout to ensure state updates before navigation
+      setTimeout(() => {
+        navigate(`/week/${weekNumber}`)
+      }, 0)
+    } else {
+      setShowWeeksMenu(false)
     }
-    setShowWeeksMenu(false)
-    setIsOpen(false)
   }
 
   // Close menus when clicking outside or on mobile menu toggle
@@ -169,17 +179,22 @@ const Navbar = () => {
               Weeks
             </button>
             {showWeeksMenu && (
-              <div className="pl-4 space-y-1">
+              <div className="pl-4 space-y-1" onClick={(e) => e.stopPropagation()}>
                 {weeks.map((week) => {
                   const isLocked = week.weekNumber > 1
                   return (
                     <button
                       key={week.weekNumber}
-                      onClick={() => handleWeekSelect(week.weekNumber)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        handleWeekSelect(week.weekNumber, e)
+                      }}
+                      disabled={isLocked}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between ${
                         isLocked 
                           ? 'opacity-60 cursor-not-allowed' 
-                          : 'hover:bg-white/10'
+                          : 'hover:bg-white/10 active:bg-white/20'
                       }`}
                     >
                       <span>{week.title}</span>

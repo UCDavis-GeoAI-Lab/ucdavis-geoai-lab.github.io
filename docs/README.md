@@ -9,3 +9,4 @@ This directory contains all course-related documentation, including lab material
 - `lecture-notes/` - Lecture notes and presentations
 - `resources/` - Additional learning resources
 
+
