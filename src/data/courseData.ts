@@ -67,7 +67,7 @@ export const tas: TA[] = [
 
 export const courseInfo = {
   code: "ABT/HYD 182",
-  title: "Advanced GIS",
+  title: "Environmental Analysis Using GIS",
   quarter: "Winter Quarter 2026",
   lecture: {
     location: "Wellman Hall 234",

@@ -39,7 +39,7 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-ucd-gold-light to-white">
-                Advanced GIS
+                Environmental Analysis Using GIS
               </h1>
             </motion.div>
             <motion.div
