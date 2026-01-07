@@ -1,9 +1,16 @@
 import { Calendar, MapPin, Users, Code } from 'lucide-react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { courseInfo, instructor, tas, weeks } from '../data/courseData'
 import WeekCard from '../components/WeekCard'
 
 const Home = () => {
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
+
+  const handleImageError = (name: string) => {
+    setImageErrors(prev => ({ ...prev, [name]: true }))
+  }
+
   return (
     <div className="w-full min-h-full">
       {/* Hero Section */}
@@ -142,11 +149,18 @@ const Home = () => {
           >
             <div className="flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <img 
-                  src="/images/Instructors/Ali_Moghimi.jpg" 
-                  alt={instructor.name}
-                  className="w-24 h-24 rounded-full object-cover border-4 border-ucd-blue shadow-lg"
-                />
+                {imageErrors['ali'] ? (
+                  <div className="bg-ucd-blue text-white rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
+                    <Users className="h-12 w-12" />
+                  </div>
+                ) : (
+                  <img 
+                    src={`${import.meta.env.BASE_URL}images/Instructors/Ali_Moghimi.jpg`}
+                    alt={instructor.name}
+                    className="w-24 h-24 rounded-full object-cover border-4 border-ucd-blue shadow-lg"
+                    onError={() => handleImageError('ali')}
+                  />
+                )}
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-ucd-blue mb-2">
@@ -192,17 +206,31 @@ const Home = () => {
                 <div className="relative z-10">
                 <div className="flex items-center mb-4">
                   {ta.name === 'Mohammadreza Narimani' ? (
-                    <img 
-                      src="/images/Instructors/Mohammadreza_Narimani.jpg" 
-                      alt={ta.name}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
-                    />
+                    imageErrors['mohammadreza'] ? (
+                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue shadow-md">
+                        <Users className="h-8 w-8" />
+                      </div>
+                    ) : (
+                      <img 
+                        src={`${import.meta.env.BASE_URL}images/Instructors/Mohammadreza_Narimani.jpg`}
+                        alt={ta.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
+                        onError={() => handleImageError('mohammadreza')}
+                      />
+                    )
                   ) : ta.name === 'Parastoo Farajpoor' ? (
-                    <img 
-                      src="/images/Instructors/Parastoo_Farajpoor.jpg" 
-                      alt={ta.name}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
-                    />
+                    imageErrors['parastoo'] ? (
+                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue shadow-md">
+                        <Users className="h-8 w-8" />
+                      </div>
+                    ) : (
+                      <img 
+                        src={`${import.meta.env.BASE_URL}images/Instructors/Parastoo_Farajpoor.jpg`}
+                        alt={ta.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
+                        onError={() => handleImageError('parastoo')}
+                      />
+                    )
                   ) : (
                     <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue">
                       <Users className="h-8 w-8" />
