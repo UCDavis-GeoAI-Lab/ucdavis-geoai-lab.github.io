@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Week from './pages/Week'
 import LabSession from './pages/LabSession'
+import Lab1 from './pages/Lab1'
 
 function App() {
   // Use basename only in production (GitHub Pages), not in development
@@ -16,6 +17,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/week/1" element={<Lab1 />} />
             <Route path="/week/:weekNumber" element={<Week />} />
             <Route path="/week/:weekNumber/session/:sessionNumber" element={<LabSession />} />
           </Routes>

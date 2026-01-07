@@ -105,30 +105,55 @@ export const courseInfo = {
 }
 
 // Placeholder data for 10 weeks - will be filled in as content is added
-export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => ({
-  weekNumber: i + 1,
-  title: `Week ${i + 1}`,
-  description: `Lab materials and content for Week ${i + 1}`,
-  sessions: [
-    {
-      sessionNumber: 1,
-      title: `Week ${i + 1} - Lab Session 1`,
-      description: "First lab session of the week",
-      topics: ["Python fundamentals", "GIS concepts"],
-      pythonFeatures: ["Feature 1", "Feature 2"],
-      gisRecap: ["Key concept 1", "Key concept 2"],
-      content: "Content will be added here..."
-    },
-    {
-      sessionNumber: 2,
-      title: `Week ${i + 1} - Lab Session 2`,
-      description: "Second lab session of the week",
-      topics: ["Advanced Python", "GIS applications"],
-      pythonFeatures: ["Feature 3", "Feature 4"],
-      gisRecap: ["Key concept 3", "Key concept 4"],
-      content: "Content will be added here..."
+export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
+  const weekNum = i + 1
+  
+  // Week 1 has only 1 lab session that goes directly to Lab 1 materials
+  if (weekNum === 1) {
+    return {
+      weekNumber: weekNum,
+      title: `Week ${weekNum}`,
+      description: `Lab materials and content for Week ${weekNum}`,
+      sessions: [
+        {
+          sessionNumber: 1,
+          title: `Lab 1`,
+          description: "Lab 1 materials",
+          topics: ["Python fundamentals", "GIS concepts"],
+          pythonFeatures: ["Feature 1", "Feature 2"],
+          gisRecap: ["Key concept 1", "Key concept 2"],
+          content: "Access Lab 1 materials here. This session contains all the materials and exercises for Lab 1."
+        }
+      ]
     }
-  ]
-}))
+  }
+  
+  // Other weeks have 2 sessions
+  return {
+    weekNumber: weekNum,
+    title: `Week ${weekNum}`,
+    description: `Lab materials and content for Week ${weekNum}`,
+    sessions: [
+      {
+        sessionNumber: 1,
+        title: `Week ${weekNum} - Lab Session 1`,
+        description: "First lab session of the week",
+        topics: ["Python fundamentals", "GIS concepts"],
+        pythonFeatures: ["Feature 1", "Feature 2"],
+        gisRecap: ["Key concept 1", "Key concept 2"],
+        content: "Content will be added here..."
+      },
+      {
+        sessionNumber: 2,
+        title: `Week ${weekNum} - Lab Session 2`,
+        description: "Second lab session of the week",
+        topics: ["Advanced Python", "GIS applications"],
+        pythonFeatures: ["Feature 3", "Feature 4"],
+        gisRecap: ["Key concept 3", "Key concept 4"],
+        content: "Content will be added here..."
+      }
+    ]
+  }
+})
 
 

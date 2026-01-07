@@ -28,11 +28,11 @@ const LabSession = () => {
       <div className="bg-ucd-blue text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link 
-            to={`/week/${week.weekNumber}`}
+            to={week.weekNumber === 1 ? "/" : `/week/${week.weekNumber}`}
             className="inline-flex items-center text-white/90 hover:text-white mb-6 transition-colors"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Week {week.weekNumber}
+            {week.weekNumber === 1 ? "Back to Home" : `Back to Week ${week.weekNumber}`}
           </Link>
           <div className="flex items-center space-x-4 mb-4">
             <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl">
