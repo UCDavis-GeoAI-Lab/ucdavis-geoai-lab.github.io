@@ -142,48 +142,48 @@ const Home = () => {
           
           {/* Instructor */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-2xl p-10 mb-12 max-w-5xl mx-auto border-t-4 border-ucd-blue transform hover:shadow-3xl transition-shadow duration-300"
+            className="bg-white rounded-2xl shadow-2xl p-6 sm:p-10 mb-12 max-w-5xl mx-auto border-t-4 border-ucd-blue transform hover:shadow-3xl transition-shadow duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="flex items-start space-x-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
               <div className="flex-shrink-0">
                 {imageErrors['ali'] ? (
-                  <div className="bg-ucd-blue text-white rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
-                    <Users className="h-12 w-12" />
+                  <div className="bg-ucd-blue text-white rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
+                    <Users className="h-10 w-10 sm:h-12 sm:w-12" />
                   </div>
                 ) : (
                   <img 
                     src={`${import.meta.env.BASE_URL}images/Instructors/Ali_Moghimi.jpg`}
                     alt={instructor.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-ucd-blue shadow-lg"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-ucd-blue shadow-lg"
                     onError={() => handleImageError('ali')}
                   />
                 )}
               </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-ucd-blue mb-2">
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-ucd-blue mb-2">
                   {instructor.name}
                   {instructor.pronouns && (
-                    <span className="text-lg font-normal text-gray-600 ml-2">
+                    <span className="text-base sm:text-lg font-normal text-gray-600 ml-2 block sm:inline">
                       ({instructor.pronouns})
                     </span>
                   )}
                 </h3>
-                <p className="text-lg text-gray-700 mb-4">{instructor.title}</p>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    <span>{instructor.office}</span>
+                <p className="text-base sm:text-lg text-gray-700 mb-4">{instructor.title}</p>
+                <div className="space-y-2 text-sm sm:text-base text-gray-600">
+                  <div className="flex items-center justify-center sm:justify-start">
+                    <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="break-words">{instructor.office}</span>
                   </div>
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    <span>{instructor.officeHours}</span>
+                  <div className="flex items-center justify-center sm:justify-start">
+                    <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="break-words">{instructor.officeHours}</span>
                   </div>
-                  <div className="flex items-center">
-                    <Users className="h-4 w-4 mr-2" />
-                    <a href={`mailto:${instructor.email}`} className="text-ucd-blue hover:underline">
+                  <div className="flex items-center justify-center sm:justify-start">
+                    <Users className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <a href={`mailto:${instructor.email}`} className="text-ucd-blue hover:underline break-all">
                       {instructor.email}
                     </a>
                   </div>
@@ -197,67 +197,67 @@ const Home = () => {
             {tas.map((ta, idx) => (
               <motion.div 
                 key={idx} 
-                className="bg-white rounded-2xl shadow-2xl p-10 max-w-5xl mx-auto border-t-4 border-ucd-gold transform hover:shadow-3xl transition-shadow duration-300"
+                className="bg-white rounded-2xl shadow-2xl p-6 sm:p-10 max-w-5xl mx-auto border-t-4 border-ucd-gold transform hover:shadow-3xl transition-shadow duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 + idx * 0.1 }}
               >
-                <div className="flex items-start space-x-6">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                   <div className="flex-shrink-0">
                     {ta.name === 'Mohammadreza Narimani' ? (
                       imageErrors['mohammadreza'] ? (
-                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
-                          <Users className="h-12 w-12" />
+                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
+                          <Users className="h-10 w-10 sm:h-12 sm:w-12" />
                         </div>
                       ) : (
                         <img 
                           src={`${import.meta.env.BASE_URL}images/Instructors/Mohammadreza_Narimani.jpg`}
                           alt={ta.name}
-                          className="w-24 h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
+                          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
                           onError={() => handleImageError('mohammadreza')}
                         />
                       )
                     ) : ta.name === 'Parastoo Farajpoor' ? (
                       imageErrors['parastoo'] ? (
-                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
-                          <Users className="h-12 w-12" />
+                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
+                          <Users className="h-10 w-10 sm:h-12 sm:w-12" />
                         </div>
                       ) : (
                         <img 
                           src={`${import.meta.env.BASE_URL}images/Instructors/Parastoo_Farajpoor.jpg`}
                           alt={ta.name}
-                          className="w-24 h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
+                          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
                           onError={() => handleImageError('parastoo')}
                         />
                       )
                     ) : (
-                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
-                        <Users className="h-12 w-12" />
+                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
+                        <Users className="h-10 w-10 sm:h-12 sm:w-12" />
                       </div>
                     )}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-ucd-blue mb-2">
+                  <div className="flex-1 text-center sm:text-left">
+                    <h3 className="text-xl sm:text-2xl font-bold text-ucd-blue mb-2">
                       {ta.name}
                       {ta.name === 'Mohammadreza Narimani' && (
-                        <span className="text-lg font-normal text-gray-600 ml-2">
+                        <span className="text-base sm:text-lg font-normal text-gray-600 ml-2 block sm:inline">
                           (Web Developer)
                         </span>
                       )}
                     </h3>
-                    <p className="text-lg text-gray-700 mb-4">Section {ta.labSection} TA</p>
-                    <div className="space-y-2 text-gray-600">
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-2" />
-                        <span>{ta.officeHours}</span>
+                    <p className="text-base sm:text-lg text-gray-700 mb-4">Section {ta.labSection} TA</p>
+                    <div className="space-y-2 text-sm sm:text-base text-gray-600">
+                      <div className="flex items-center justify-center sm:justify-start">
+                        <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span className="break-words">{ta.officeHours}</span>
                       </div>
-                      <div className="flex items-center">
-                        <MapPin className="h-4 w-4 mr-2" />
-                        <span>{ta.location}</span>
+                      <div className="flex items-center justify-center sm:justify-start">
+                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <span className="break-words">{ta.location}</span>
                       </div>
-                      <div className="flex items-center">
-                        <Users className="h-4 w-4 mr-2" />
-                        <a href={`mailto:${ta.email}`} className="text-ucd-blue hover:underline">
+                      <div className="flex items-center justify-center sm:justify-start">
+                        <Users className="h-4 w-4 mr-2 flex-shrink-0" />
+                        <a href={`mailto:${ta.email}`} className="text-ucd-blue hover:underline break-all">
                           {ta.email}
                         </a>
                       </div>
