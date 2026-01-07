@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, GraduationCap, Calendar, Lock, Github } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import { weeks } from '../data/courseData'
@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showWeeksMenu, setShowWeeksMenu] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const weeksMenuRef = useRef<HTMLDivElement>(null)
 
   const isActive = (path: string) => location.pathname === path
@@ -22,7 +23,19 @@ const Navbar = () => {
     setIsOpen(false)
   }
 
-  // Close menus when clicking outside or on mobile menu toggle
+  const handleMobileWeekClick = (weekNumber: number, e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    // Close menus first
+    setShowWeeksMenu(false)
+    setIsOpen(false)
+    // Navigate after a tiny delay to ensure state updates complete
+    requestAnimationFrame(() => {
+      navigate(`/week/${weekNumber}`)
+    })
+  }
+
+  // Close menus when clicking outside (desktop only)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (weeksMenuRef.current && !weeksMenuRef.current.contains(event.target as Node)) {
@@ -30,7 +43,7 @@ const Navbar = () => {
       }
     }
 
-    if (showWeeksMenu) {
+    if (showWeeksMenu && window.innerWidth >= 768) {
       document.addEventListener('mousedown', handleClickOutside)
     }
 
@@ -38,13 +51,6 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [showWeeksMenu])
-
-  // Close weeks menu when main mobile menu closes
-  useEffect(() => {
-    if (!isOpen) {
-      setShowWeeksMenu(false)
-    }
-  }, [isOpen])
 
   return (
     <nav className="bg-ucd-blue text-white shadow-xl sticky top-0 z-50 border-b-2 border-ucd-gold/20">
@@ -164,7 +170,7 @@ const Navbar = () => {
               Weeks
             </button>
             {showWeeksMenu && (
-              <div className="pl-4 space-y-1">
+              <div className="pl-4 space-y-1" onClick={(e) => e.stopPropagation()}>
                 {weeks.map((week) => {
                   const isLocked = week.weekNumber > 1
                   if (isLocked) {
@@ -180,17 +186,13 @@ const Navbar = () => {
                     )
                   }
                   return (
-                    <Link
+                    <button
                       key={week.weekNumber}
-                      to={`/week/${week.weekNumber}`}
-                      onClick={() => {
-                        setShowWeeksMenu(false)
-                        setIsOpen(false)
-                      }}
-                      className="block w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between hover:bg-white/10 active:bg-white/20"
+                      onClick={(e) => handleMobileWeekClick(week.weekNumber, e)}
+                      className="w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between hover:bg-white/10 active:bg-white/20"
                     >
                       <span>{week.title}</span>
-                    </Link>
+                    </button>
                   )
                 })}
               </div>
