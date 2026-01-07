@@ -176,7 +176,6 @@ const Navbar = () => {
                     <button
                       key={week.weekNumber}
                       onClick={() => handleWeekSelect(week.weekNumber)}
-                      disabled={isLocked}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between ${
                         isLocked 
                           ? 'opacity-60 cursor-not-allowed' 
