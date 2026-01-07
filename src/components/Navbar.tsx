@@ -18,7 +18,8 @@ const Navbar = () => {
   }
 
   const handleWeekSelect = (weekNumber: number) => {
-    if (weekNumber === 1) {
+    const isLocked = weekNumber > 1
+    if (!isLocked) {
       navigate(`/week/${weekNumber}`)
     }
     setShowWeeksMenu(false)
