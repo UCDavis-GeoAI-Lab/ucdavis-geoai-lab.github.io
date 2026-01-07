@@ -193,72 +193,76 @@ const Home = () => {
           </motion.div>
 
           {/* TAs */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-8">
             {tas.map((ta, idx) => (
               <motion.div 
                 key={idx} 
-                className="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-4 border-ucd-gold transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                className="bg-white rounded-2xl shadow-2xl p-10 max-w-5xl mx-auto border-t-4 border-ucd-gold transform hover:shadow-3xl transition-shadow duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.4 + idx * 0.1 }}
               >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-ucd-gold opacity-5 rounded-full -mr-12 -mt-12"></div>
-                <div className="relative z-10">
-                <div className="flex items-center mb-4">
-                  {ta.name === 'Mohammadreza Narimani' ? (
-                    imageErrors['mohammadreza'] ? (
-                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue shadow-md">
-                        <Users className="h-8 w-8" />
-                      </div>
+                <div className="flex items-start space-x-6">
+                  <div className="flex-shrink-0">
+                    {ta.name === 'Mohammadreza Narimani' ? (
+                      imageErrors['mohammadreza'] ? (
+                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
+                          <Users className="h-12 w-12" />
+                        </div>
+                      ) : (
+                        <img 
+                          src={`${import.meta.env.BASE_URL}images/Instructors/Mohammadreza_Narimani.jpg`}
+                          alt={ta.name}
+                          className="w-24 h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
+                          onError={() => handleImageError('mohammadreza')}
+                        />
+                      )
+                    ) : ta.name === 'Parastoo Farajpoor' ? (
+                      imageErrors['parastoo'] ? (
+                        <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-gold shadow-lg">
+                          <Users className="h-12 w-12" />
+                        </div>
+                      ) : (
+                        <img 
+                          src={`${import.meta.env.BASE_URL}images/Instructors/Parastoo_Farajpoor.jpg`}
+                          alt={ta.name}
+                          className="w-24 h-24 rounded-full object-cover border-4 border-ucd-gold shadow-lg"
+                          onError={() => handleImageError('parastoo')}
+                        />
+                      )
                     ) : (
-                      <img 
-                        src={`${import.meta.env.BASE_URL}images/Instructors/Mohammadreza_Narimani.jpg`}
-                        alt={ta.name}
-                        className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
-                        onError={() => handleImageError('mohammadreza')}
-                      />
-                    )
-                  ) : ta.name === 'Parastoo Farajpoor' ? (
-                    imageErrors['parastoo'] ? (
-                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue shadow-md">
-                        <Users className="h-8 w-8" />
+                      <div className="bg-ucd-gold text-ucd-blue rounded-full w-24 h-24 flex items-center justify-center flex-shrink-0 border-4 border-ucd-blue shadow-lg">
+                        <Users className="h-12 w-12" />
                       </div>
-                    ) : (
-                      <img 
-                        src={`${import.meta.env.BASE_URL}images/Instructors/Parastoo_Farajpoor.jpg`}
-                        alt={ta.name}
-                        className="w-16 h-16 rounded-full object-cover border-2 border-ucd-gold shadow-md flex-shrink-0"
-                        onError={() => handleImageError('parastoo')}
-                      />
-                    )
-                  ) : (
-                    <div className="bg-ucd-gold text-ucd-blue rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 border-2 border-ucd-blue">
-                      <Users className="h-8 w-8" />
-                    </div>
-                  )}
-                  <div className="ml-4">
-                    <h3 className="font-bold text-lg text-ucd-blue">{ta.name}</h3>
-                    <p className="text-sm text-gray-600">
-                      Section {ta.labSection}
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-ucd-blue mb-2">
+                      {ta.name}
                       {ta.name === 'Mohammadreza Narimani' && (
-                        <span className="block text-ucd-blue font-medium mt-1">Web Developer</span>
+                        <span className="text-lg font-normal text-gray-600 ml-2">
+                          (Web Developer)
+                        </span>
                       )}
-                    </p>
+                    </h3>
+                    <p className="text-lg text-gray-700 mb-4">Section {ta.labSection} TA</p>
+                    <div className="space-y-2 text-gray-600">
+                      <div className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        <span>{ta.officeHours}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="h-4 w-4 mr-2" />
+                        <span>{ta.location}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="h-4 w-4 mr-2" />
+                        <a href={`mailto:${ta.email}`} className="text-ucd-blue hover:underline">
+                          {ta.email}
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    <span>{ta.officeHours}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    <span>{ta.location}</span>
-                  </div>
-                  <a href={`mailto:${ta.email}`} className="text-ucd-blue hover:underline block font-medium">
-                    {ta.email}
-                  </a>
-                </div>
                 </div>
               </motion.div>
             ))}
