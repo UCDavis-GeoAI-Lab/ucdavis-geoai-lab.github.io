@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, GraduationCap, Calendar, Lock, Github } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import { weeks } from '../data/courseData'
@@ -7,7 +7,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showWeeksMenu, setShowWeeksMenu] = useState(false)
   const location = useLocation()
-  const navigate = useNavigate()
   const weeksMenuRef = useRef<HTMLDivElement>(null)
 
   const isActive = (path: string) => location.pathname === path
@@ -21,18 +20,6 @@ const Navbar = () => {
     // Close menus when link is clicked
     setShowWeeksMenu(false)
     setIsOpen(false)
-  }
-
-  const handleMobileWeekClick = (weekNumber: number, e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    // Close menus first
-    setShowWeeksMenu(false)
-    setIsOpen(false)
-    // Navigate after a tiny delay to ensure state updates complete
-    requestAnimationFrame(() => {
-      navigate(`/week/${weekNumber}`)
-    })
   }
 
   // Close menus when clicking outside (desktop only)
@@ -90,7 +77,7 @@ const Navbar = () => {
               </button>
               
               {showWeeksMenu && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 overflow-hidden">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-ucd-blue rounded-xl shadow-2xl border border-ucd-gold/20 py-2 z-50 overflow-hidden">
                   <div className="max-h-96 overflow-y-auto">
                     {weeks.map((week) => {
                       const isLocked = week.weekNumber > 1
@@ -99,10 +86,10 @@ const Navbar = () => {
                           <button
                             key={week.weekNumber}
                             disabled
-                            className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between opacity-60 cursor-not-allowed text-gray-500"
+                            className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between opacity-60 cursor-not-allowed text-white/70"
                           >
                             <span className="font-semibold">{week.title}</span>
-                            <Lock className="h-4 w-4 text-gray-400" />
+                            <Lock className="h-4 w-4 text-white/70" />
                           </button>
                         )
                       }
@@ -111,9 +98,9 @@ const Navbar = () => {
                           key={week.weekNumber}
                           to={`/week/${week.weekNumber}`}
                           onClick={handleLinkClick}
-                          className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between group hover:bg-ucd-blue hover:text-white text-ucd-blue"
+                          className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between group hover:bg-white/10 text-white"
                         >
-                          <span className="font-semibold group-hover:text-white">{week.title}</span>
+                          <span className="font-semibold">{week.title}</span>
                         </Link>
                       )
                     })}
@@ -170,7 +157,7 @@ const Navbar = () => {
               Weeks
             </button>
             {showWeeksMenu && (
-              <div className="pl-4 space-y-1" onClick={(e) => e.stopPropagation()}>
+              <div className="pl-4 space-y-1">
                 {weeks.map((week) => {
                   const isLocked = week.weekNumber > 1
                   if (isLocked) {
@@ -179,6 +166,7 @@ const Navbar = () => {
                         key={week.weekNumber}
                         disabled
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between opacity-60 cursor-not-allowed"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <span>{week.title}</span>
                         <Lock className="h-4 w-4 text-white/70" />
@@ -186,13 +174,14 @@ const Navbar = () => {
                     )
                   }
                   return (
-                    <button
+                    <Link
                       key={week.weekNumber}
-                      onClick={(e) => handleMobileWeekClick(week.weekNumber, e)}
-                      className="w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between hover:bg-white/10 active:bg-white/20"
+                      to={`/week/${week.weekNumber}`}
+                      onClick={handleLinkClick}
+                      className="block w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between hover:bg-white/10 active:bg-white/20"
                     >
                       <span>{week.title}</span>
-                    </button>
+                    </Link>
                   )
                 })}
               </div>
