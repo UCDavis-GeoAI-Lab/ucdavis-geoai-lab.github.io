@@ -20,12 +20,12 @@ const Navbar = () => {
   const handleWeekSelect = (weekNumber: number) => {
     if (weekNumber === 1) {
       navigate(`/week/${weekNumber}`)
-      setShowWeeksMenu(false)
-      setIsOpen(false)
     }
+    setShowWeeksMenu(false)
+    setIsOpen(false)
   }
 
-  // Close menu when clicking outside
+  // Close menus when clicking outside or on mobile menu toggle
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (weeksMenuRef.current && !weeksMenuRef.current.contains(event.target as Node)) {
@@ -41,6 +41,13 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [showWeeksMenu])
+
+  // Close weeks menu when main mobile menu closes
+  useEffect(() => {
+    if (!isOpen) {
+      setShowWeeksMenu(false)
+    }
+  }, [isOpen])
 
   return (
     <nav className="bg-ucd-blue text-white shadow-xl sticky top-0 z-50 border-b-2 border-ucd-gold/20">
@@ -80,7 +87,7 @@ const Navbar = () => {
               </button>
               
               {showWeeksMenu && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 overflow-hidden">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-ucd-blue rounded-xl shadow-2xl border border-ucd-gold/30 py-2 z-50 overflow-hidden">
                   <div className="max-h-96 overflow-y-auto">
                     {weeks.map((week) => {
                       const isLocked = week.weekNumber > 1
@@ -91,17 +98,19 @@ const Navbar = () => {
                           disabled={isLocked}
                           className={`w-full text-left px-4 py-3 transition-colors flex items-center justify-between group ${
                             isLocked 
-                              ? 'opacity-60 cursor-not-allowed' 
-                              : 'hover:bg-ucd-blue hover:text-white'
+                              ? 'opacity-60 cursor-not-allowed text-white/60' 
+                              : 'hover:bg-ucd-gold hover:text-ucd-blue text-white'
                           }`}
                         >
                           <div className="flex items-center space-x-3">
-                            <span className={`font-semibold ${isLocked ? 'text-gray-500' : 'text-ucd-blue group-hover:text-white'}`}>
+                            <span className={`font-semibold ${
+                              isLocked ? 'text-white/60' : 'text-white group-hover:text-ucd-blue'
+                            }`}>
                               {week.title}
                             </span>
                           </div>
                           {isLocked && (
-                            <Lock className="h-4 w-4 text-gray-400" />
+                            <Lock className="h-4 w-4 text-white/40" />
                           )}
                         </button>
                       )
