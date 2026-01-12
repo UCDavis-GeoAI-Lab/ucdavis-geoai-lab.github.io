@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Trash2, User, Reply, Send, X, AlertTriangle } from 'lucide-react';
+import { MessageSquare, Trash2, User, Reply, Send, AlertTriangle } from 'lucide-react';
 import { db } from '../firebase';
 import { 
   collection, 
