@@ -3,9 +3,12 @@ import { ArrowLeft, BookOpen } from 'lucide-react'
 import { weeks } from '../data/courseData'
 import SessionCard from '../components/SessionCard'
 
+import QASection from '../components/QASection'
+
 const Week = () => {
   const { weekNumber } = useParams<{ weekNumber: string }>()
   const week = weeks.find(w => w.weekNumber === parseInt(weekNumber || '1'))
+  const currentWeekNum = parseInt(weekNumber || '1')
 
   if (!week) {
     return (
@@ -49,7 +52,7 @@ const Week = () => {
           <span className="font-semibold">{week.sessions.length} Lab Sessions</span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           {week.sessions.map((session) => (
             <SessionCard 
               key={session.sessionNumber} 
@@ -58,6 +61,9 @@ const Week = () => {
             />
           ))}
         </div>
+
+        {/* Q&A Section */}
+        <QASection weekNumber={currentWeekNum} />
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Download, Code, BookOpen, ExternalLink, PlayCircle, FileText, CheckCircle, AlertCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
+import QASection from '../components/QASection'
 
 const Lab1 = () => {
   // Use base path for production (GitHub Pages), empty for development
@@ -808,9 +809,12 @@ print(f"Total study hours this semester: {total_hours} hours")
         </motion.section>
 
         {/* Download Button - Bottom */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-12">
           <DownloadButton position="bottom" />
         </div>
+
+        {/* Q&A Section */}
+        <QASection weekNumber={1} />
       </div>
     </div>
   )
