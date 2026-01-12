@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Trash2, User, Reply, Send } from 'lucide-react';
+import { MessageSquare, Trash2, User, Reply, Send, X, AlertTriangle } from 'lucide-react';
 import { db } from '../firebase';
 import { 
   collection, 
@@ -35,6 +35,68 @@ interface QASectionProps {
   weekNumber: number;
 }
 
+// Confirmation Modal Component
+interface ConfirmationModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  title: string;
+  message: string;
+  isDeleting: boolean;
+}
+
+const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onConfirm, 
+  title, 
+  message, 
+  isDeleting 
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-200">
+        <div className="p-6">
+          <div className="flex items-start space-x-4">
+            <div className="bg-red-100 p-3 rounded-full flex-shrink-0">
+              <AlertTriangle className="h-6 w-6 text-red-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+              <p className="text-gray-600 leading-relaxed">{message}</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ucd-blue transition-colors"
+            disabled={isDeleting}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors flex items-center"
+            disabled={isDeleting}
+          >
+            {isDeleting ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                Deleting...
+              </>
+            ) : (
+              'Delete'
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
   const [questions, setQuestions] = useState<QuestionData[]>([]);
   const [newQuestion, setNewQuestion] = useState('');
@@ -42,6 +104,11 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
   const [replyText, setReplyText] = useState<{ [key: string]: string }>({});
   const [replyAuthor, setReplyAuthor] = useState<{ [key: string]: string }>({});
   const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
+  
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<{ type: 'question' | 'reply', id: string, replyData?: ReplyData } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Load data from Firestore
   useEffect(() => {
@@ -112,28 +179,31 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
     }
   };
 
-  const handleDeleteQuestion = async (questionId: string) => {
-    if (window.confirm('Are you sure you want to delete this question?')) {
-      try {
-        await deleteDoc(doc(db, "questions", questionId));
-      } catch (e) {
-        console.error("Error deleting document: ", e);
-        alert("Error deleting question.");
-      }
-    }
+  const confirmDelete = (type: 'question' | 'reply', id: string, replyData?: ReplyData) => {
+    setItemToDelete({ type, id, replyData });
+    setModalOpen(true);
   };
 
-  const handleDeleteReply = async (questionId: string, reply: ReplyData) => {
-    if (window.confirm('Are you sure you want to delete this reply?')) {
-      try {
-        const questionRef = doc(db, "questions", questionId);
+  const handleConfirmDelete = async () => {
+    if (!itemToDelete) return;
+
+    setIsDeleting(true);
+    try {
+      if (itemToDelete.type === 'question') {
+        await deleteDoc(doc(db, "questions", itemToDelete.id));
+      } else if (itemToDelete.type === 'reply' && itemToDelete.replyData) {
+        const questionRef = doc(db, "questions", itemToDelete.id);
         await updateDoc(questionRef, {
-          replies: arrayRemove(reply)
+          replies: arrayRemove(itemToDelete.replyData)
         });
-      } catch (e) {
-        console.error("Error deleting reply: ", e);
-        alert("Error deleting reply.");
       }
+    } catch (e) {
+      console.error("Error deleting item: ", e);
+      alert("Error deleting item. Please try again.");
+    } finally {
+      setIsDeleting(false);
+      setModalOpen(false);
+      setItemToDelete(null);
     }
   };
 
@@ -149,6 +219,17 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
 
   return (
     <div className="mt-16 border-t border-gray-200 pt-12">
+      <ConfirmationModal 
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        title={itemToDelete?.type === 'question' ? 'Delete Question' : 'Delete Reply'}
+        message={itemToDelete?.type === 'question' 
+          ? 'Are you sure you want to delete this question? This action cannot be undone.' 
+          : 'Are you sure you want to delete this reply? This action cannot be undone.'}
+        isDeleting={isDeleting}
+      />
+
       <div className="flex items-center space-x-3 mb-8">
         <MessageSquare className="h-8 w-8 text-ucd-blue" />
         <h2 className="text-3xl font-bold text-ucd-blue">Q&A Discussion</h2>
@@ -212,7 +293,7 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleDeleteQuestion(question.id)}
+                    onClick={() => confirmDelete('question', question.id)}
                     className="text-gray-400 hover:text-red-500 transition-colors p-1"
                     title="Delete question"
                   >
@@ -289,7 +370,7 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
                               <div className="flex items-center space-x-2">
                                 <span className="text-xs text-gray-500">{formatDate(reply.createdAt)}</span>
                                 <button
-                                  onClick={() => handleDeleteReply(question.id, reply)}
+                                  onClick={() => confirmDelete('reply', question.id, reply)}
                                   className="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
                                   title="Delete reply"
                                 >
