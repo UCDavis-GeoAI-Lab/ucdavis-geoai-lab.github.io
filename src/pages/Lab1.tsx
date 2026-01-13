@@ -201,20 +201,15 @@ const Lab1 = () => {
 
         {/* 2. Input & Output */}
         <Section title="Input & Output">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="space-y-12">
             {/* Input */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-xl text-gray-800 flex items-center mb-2">
-                  <Type className="w-6 h-6 mr-2 text-ucd-blue" /> User Input
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  The <code>input()</code> function allows you to get data from the user. It <strong>always returns a string</strong>.
-                </p>
-                <div className="mt-2 mb-4">
-                  <ResourceLink href="https://www.w3schools.com/python/ref_func_input.asp" text="W3Schools: input() Reference" />
-                </div>
-              </div>
+            <div className="max-w-5xl mx-auto">
+              <h3 className="font-bold text-xl text-gray-800 flex items-center mb-3">
+                <Type className="w-6 h-6 mr-3 text-ucd-blue" /> User Input
+              </h3>
+              <p className="text-gray-600 mb-4 text-lg">
+                The <code>input()</code> function allows you to get data from the user. It <strong>always returns a string</strong>.
+              </p>
               <CodeBlock 
                 code={`# Asking for satellite sensor name
 sensor = input('Enter sensor name:')
@@ -222,21 +217,19 @@ print('Processing data from ' + sensor)`}
                 output={`Enter sensor name: Sentinel-2
 Processing data from Sentinel-2`} 
               />
+              <div className="mt-3">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_input.asp" text="W3Schools: input() Reference" />
+              </div>
             </div>
 
             {/* Print */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-xl text-gray-800 flex items-center mb-2">
-                  <Terminal className="w-6 h-6 mr-2 text-ucd-blue" /> Printing Output
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  The <code>print()</code> function displays output to the screen. You can print multiple objects by separating them with commas.
-                </p>
-                <div className="mt-2 mb-4">
-                  <ResourceLink href="https://www.w3schools.com/python/ref_func_print.asp" text="W3Schools: print() Reference" />
-                </div>
-              </div>
+            <div className="max-w-5xl mx-auto">
+              <h3 className="font-bold text-xl text-gray-800 flex items-center mb-3">
+                <Terminal className="w-6 h-6 mr-3 text-ucd-blue" /> Printing Output
+              </h3>
+              <p className="text-gray-600 mb-4 text-lg">
+                The <code>print()</code> function displays output to the screen. You can print multiple objects by separating them with commas.
+              </p>
               <CodeBlock 
                 code={`# Printing GIS metadata
 satellite = "Landsat 8"
@@ -244,64 +237,58 @@ bands = 11
 print("Satellite:", satellite, "| Total Bands:", bands)`} 
                 output={`Satellite: Landsat 8 | Total Bands: 11`} 
               />
+              <div className="mt-3">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_print.asp" text="W3Schools: print() Reference" />
+              </div>
             </div>
           </div>
         </Section>
 
         {/* 3. F-Strings */}
         <Section title="String Formatting (F-Strings)">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5 space-y-6">
-              <p className="text-gray-600 text-lg">
-                F-strings (introduced in Python 3.6) are the modern way to embed variables directly into strings. 
-                Prefix your string with <code>f</code> and put variables in curly braces <code>{`{}`}</code>.
-              </p>
-              
-              <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400 text-yellow-900">
-                <h4 className="font-bold text-lg mb-3">Why use F-Strings?</h4>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Cleaner and more readable syntax</li>
-                  <li>Faster than old <code>%</code> formatting</li>
-                  <li>Can evaluate expressions like <code>{`{5 * 2}`}</code> directly inside</li>
-                </ul>
-              </div>
-              
-              <div>
-                <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings Guide" />
-              </div>
+          <div className="max-w-5xl mx-auto">
+            <p className="text-gray-600 text-lg mb-6">
+              F-strings (introduced in Python 3.6) are the modern way to embed variables directly into strings. 
+              Prefix your string with <code>f</code> and put variables in curly braces <code>{`{}`}</code>.
+            </p>
+            
+            <div className="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400 text-yellow-900 mb-8">
+              <h4 className="font-bold text-lg mb-3">Why use F-Strings?</h4>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Cleaner and more readable syntax</li>
+                <li>Faster than old <code>%</code> formatting</li>
+                <li>Can evaluate expressions like <code>{`{5 * 2}`}</code> directly inside</li>
+              </ul>
             </div>
 
-            <div className="lg:col-span-7">
-              <CodeBlock 
-                code={`# GIS Example
+            <CodeBlock 
+              code={`# GIS Example
 location = "Davis, CA"
 elevation = 16
 
 # Embed variables directly
 print(f"The elevation of {location} is {elevation} meters.")`} 
-                output="The elevation of Davis, CA is 16 meters." 
-              />
+              output="The elevation of Davis, CA is 16 meters." 
+            />
+            
+            <div className="mt-3">
+              <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings Guide" />
             </div>
           </div>
         </Section>
 
         {/* 4. Math & Type Casting */}
         <Section title="Math & Type Conversion">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="space-y-12">
             {/* Float Conversion */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-xl text-gray-800 flex items-center mb-2">
-                  <Calculator className="w-6 h-6 mr-2 text-ucd-blue" /> Converting Input to Numbers
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Since <code>input()</code> returns text (string), you MUST convert it to a number before doing math. 
-                  Use <code>float()</code> for decimals (like coordinates) or <code>int()</code> for whole numbers.
-                </p>
-                <div className="mt-2 mb-4">
-                  <ResourceLink href="https://www.includehelp.com/python/read-input-as-a-float.aspx" text="IncludeHelp: Reading Float Input" />
-                </div>
-              </div>
+            <div className="max-w-5xl mx-auto">
+              <h3 className="font-bold text-xl text-gray-800 flex items-center mb-3">
+                <Calculator className="w-6 h-6 mr-3 text-ucd-blue" /> Converting Input to Numbers
+              </h3>
+              <p className="text-gray-600 mb-4 text-lg">
+                Since <code>input()</code> returns text (string), you MUST convert it to a number before doing math. 
+                Use <code>float()</code> for decimals (like coordinates) or <code>int()</code> for whole numbers.
+              </p>
               <CodeBlock 
                 code={`# Calculate NDVI (Normalized Difference Vegetation Index)
 # Formula: (NIR - Red) / (NIR + Red)
@@ -315,27 +302,28 @@ print(f"Calculated NDVI: {ndvi}")`}
 Enter Red value: 0.1
 Calculated NDVI: 0.7142857142857143`} 
               />
+              <div className="mt-3">
+                <ResourceLink href="https://www.includehelp.com/python/read-input-as-a-float.aspx" text="IncludeHelp: Reading Float Input" />
+              </div>
             </div>
 
             {/* Rounding */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-xl text-gray-800 flex items-center mb-2">
-                  <CheckSquare className="w-6 h-6 mr-2 text-ucd-blue" /> Rounding Numbers
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Use <code>round(number, digits)</code> to keep your output clean.
-                </p>
-                <div className="mt-2 mb-4">
-                  <ResourceLink href="https://www.w3schools.com/python/ref_func_round.asp" text="W3Schools: round() Function" />
-                </div>
-              </div>
+            <div className="max-w-5xl mx-auto">
+              <h3 className="font-bold text-xl text-gray-800 flex items-center mb-3">
+                <CheckSquare className="w-6 h-6 mr-3 text-ucd-blue" /> Rounding Numbers
+              </h3>
+              <p className="text-gray-600 mb-4 text-lg">
+                Use <code>round(number, digits)</code> to keep your output clean.
+              </p>
               <CodeBlock 
                 code={`# Rounding the NDVI result
 clean_ndvi = round(0.7142857142857143, 2)
 print(f"Clean NDVI: {clean_ndvi}")`} 
                 output="Clean NDVI: 0.71" 
               />
+              <div className="mt-3">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_round.asp" text="W3Schools: round() Function" />
+              </div>
             </div>
           </div>
         </Section>
