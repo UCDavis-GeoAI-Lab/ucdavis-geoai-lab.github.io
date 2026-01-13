@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Download, Code, Terminal, Play, Video, ExternalLink, Calculator, Type, FileText, CheckSquare } from 'lucide-react'
+import { ArrowLeft, Download, Terminal, Play, Video, ExternalLink, Calculator, Type, FileText, CheckSquare, RefreshCw } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import QASection from '../components/QASection'
 
 const Lab1 = () => {
@@ -17,33 +18,69 @@ const Lab1 = () => {
     document.body.removeChild(link)
   }
 
-  const CodeBlock = ({ code, output }: { code: string, output?: string }) => (
-    <div className="bg-gray-900 rounded-lg overflow-hidden my-4 shadow-lg border border-gray-700">
-      <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
-        <span className="text-gray-400 text-xs font-mono">Python 3</span>
-      </div>
-      <div className="p-4 overflow-x-auto">
-        <pre className="text-gray-100 font-mono text-sm leading-relaxed whitespace-pre-wrap">
-          {code}
-        </pre>
-      </div>
-      {output && (
-        <div className="bg-black/50 p-4 border-t border-gray-700">
-          <div className="text-gray-400 text-xs font-bold mb-2 uppercase flex items-center">
-            <Terminal className="w-3 h-3 mr-1" /> Output
+  const CodeBlock = ({ code, output }: { code: string, output?: string }) => {
+    const [isRunning, setIsRunning] = useState(false)
+    const [showOutput, setShowOutput] = useState(false)
+
+    const handleRun = () => {
+      setIsRunning(true)
+      setShowOutput(false)
+      
+      // Simulate execution time
+      setTimeout(() => {
+        setIsRunning(false)
+        setShowOutput(true)
+      }, 800)
+    }
+
+    return (
+      <div className="bg-gray-900 rounded-lg overflow-hidden my-4 shadow-lg border border-gray-700">
+        <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+          <div className="flex space-x-2">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <pre className="text-green-400 font-mono text-sm whitespace-pre-wrap">
-            {output}
+          <div className="flex items-center space-x-4">
+            <span className="text-gray-400 text-xs font-mono">Python 3</span>
+            {output && (
+              <button 
+                onClick={handleRun}
+                className="flex items-center space-x-1 text-xs bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded transition-colors"
+                disabled={isRunning}
+              >
+                {isRunning ? (
+                  <RefreshCw className="w-3 h-3 animate-spin" />
+                ) : (
+                  <Play className="w-3 h-3 fill-current" />
+                )}
+                <span>{isRunning ? 'Running...' : 'Run'}</span>
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="p-4 overflow-x-auto relative">
+          <pre className="text-gray-100 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+            {code}
           </pre>
         </div>
-      )}
-    </div>
-  )
+        {showOutput && output && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            className="bg-black/50 p-4 border-t border-gray-700"
+          >
+            <div className="text-gray-400 text-xs font-bold mb-2 uppercase flex items-center">
+              <Terminal className="w-3 h-3 mr-1" /> Output
+            </div>
+            <pre className="text-green-400 font-mono text-sm whitespace-pre-wrap">
+              {output}
+            </pre>
+          </motion.div>
+        )}
+      </div>
+    )
+  }
 
   const Section = ({ title, children, id }: { title: string, children: React.ReactNode, id?: string }) => (
     <motion.section 
@@ -110,25 +147,54 @@ const Lab1 = () => {
         
         {/* 1. Intro to Colab */}
         <Section title="Getting Started with Google Colab">
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 space-y-4">
-               <p className="text-gray-600">
-                Before coding, familiarize yourself with the Google Colab environment. It allows you to write and execute Python code in your browser with zero configuration.
-              </p>
-              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-ucd-blue">
-                <h4 className="font-bold text-ucd-blue mb-2 flex items-center"><Video className="w-4 h-4 mr-2"/> Watch First</h4>
-                <ul className="space-y-2">
-                  <li><ResourceLink href="https://www.youtube.com/watch?v=inN8seMm7UI" text="Get started with Google Colaboratory (Video)" /></li>
-                  <li><ResourceLink href="https://bytexd.com/what-is-google-colab-a-beginner-guide/" text="Beginner's Guide to Colab Interface" /></li>
-                  <li><ResourceLink href="https://www.youtube.com/watch?v=RLYoEyIHL6A" text="Colab Tutorial for Beginners" /></li>
-                </ul>
+          <div className="space-y-6">
+            <p className="text-gray-600">
+              Before coding, familiarize yourself with the Google Colab environment. It allows you to write and execute Python code in your browser with zero configuration.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Video 1 */}
+              <div className="space-y-3">
+                <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/inN8seMm7UI" 
+                    title="Get started with Google Colaboratory" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="flex justify-between items-center px-1">
+                  <span className="text-sm font-semibold text-gray-700">Intro to Google Colab</span>
+                  <ResourceLink href="https://www.youtube.com/watch?v=inN8seMm7UI" text="Watch on YouTube" />
+                </div>
+              </div>
+
+              {/* Video 2 */}
+              <div className="space-y-3">
+                <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/RLYoEyIHL6A" 
+                    title="Google Colab Tutorial for Beginners" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="flex justify-between items-center px-1">
+                  <span className="text-sm font-semibold text-gray-700">Detailed Tutorial</span>
+                  <ResourceLink href="https://www.youtube.com/watch?v=RLYoEyIHL6A" text="Watch on YouTube" />
+                </div>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg flex items-center justify-center p-6 text-center">
-              <div>
-                <Play className="w-12 h-12 text-ucd-gold mx-auto mb-2 opacity-80" />
-                <span className="text-sm text-gray-500 font-medium">Watch the tutorials to learn the ribbon & features</span>
-              </div>
+
+            <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-ucd-blue mt-4">
+              <h4 className="font-bold text-ucd-blue mb-2 flex items-center"><FileText className="w-4 h-4 mr-2"/> Essential Reading</h4>
+              <ResourceLink href="https://bytexd.com/what-is-google-colab-a-beginner-guide/" text="Beginner's Guide to Colab Interface & Features" />
             </div>
           </div>
         </Section>
@@ -138,12 +204,9 @@ const Lab1 = () => {
           <div className="space-y-8">
             {/* Input */}
             <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="font-bold text-lg text-gray-800 flex items-center">
-                  <Type className="w-5 h-5 mr-2 text-ucd-blue" /> User Input
-                </h3>
-                <ResourceLink href="https://www.w3schools.com/python/ref_func_input.asp" text="W3Schools: input()" />
-              </div>
+              <h3 className="font-bold text-lg text-gray-800 flex items-center mb-2">
+                <Type className="w-5 h-5 mr-2 text-ucd-blue" /> User Input
+              </h3>
               <p className="text-gray-600 text-sm mb-3">
                 The <code>input()</code> function allows you to get data from the user. It <strong>always returns a string</strong>.
               </p>
@@ -154,16 +217,16 @@ print('Processing data from ' + sensor)`}
                 output={`Enter sensor name: Sentinel-2
 Processing data from Sentinel-2`} 
               />
+              <div className="mt-2">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_input.asp" text="W3Schools: input() Reference" />
+              </div>
             </div>
 
             {/* Print */}
             <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="font-bold text-lg text-gray-800 flex items-center">
-                  <Terminal className="w-5 h-5 mr-2 text-ucd-blue" /> Printing Output
-                </h3>
-                <ResourceLink href="https://www.w3schools.com/python/ref_func_print.asp" text="W3Schools: print()" />
-              </div>
+              <h3 className="font-bold text-lg text-gray-800 flex items-center mb-2">
+                <Terminal className="w-5 h-5 mr-2 text-ucd-blue" /> Printing Output
+              </h3>
               <p className="text-gray-600 text-sm mb-3">
                 The <code>print()</code> function displays output to the screen. You can print multiple objects by separating them with commas.
               </p>
@@ -174,31 +237,38 @@ bands = 11
 print("Satellite:", satellite, "| Total Bands:", bands)`} 
                 output={`Satellite: Landsat 8 | Total Bands: 11`} 
               />
+              <div className="mt-2">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_print.asp" text="W3Schools: print() Reference" />
+              </div>
             </div>
           </div>
         </Section>
 
         {/* 3. F-Strings */}
         <Section title="String Formatting (F-Strings)">
-          <div className="flex justify-between items-baseline mb-4">
-            <p className="text-gray-600 max-w-2xl">
+          <div className="mb-4">
+            <p className="text-gray-600 max-w-2xl mb-2">
               F-strings (introduced in Python 3.6) are the modern way to embed variables directly into strings. 
               Prefix your string with <code>f</code> and put variables in curly braces <code>{`{}`}</code>.
             </p>
-            <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <CodeBlock 
-              code={`# GIS Example
+            <div>
+              <CodeBlock 
+                code={`# GIS Example
 location = "Davis, CA"
 elevation = 16
 
 # Embed variables directly
 print(f"The elevation of {location} is {elevation} meters.")`} 
-              output="The elevation of Davis, CA is 16 meters." 
-            />
-            <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800">
+                output="The elevation of Davis, CA is 16 meters." 
+              />
+              <div className="mt-2">
+                <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings Guide" />
+              </div>
+            </div>
+            <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800 h-fit">
               <h4 className="font-bold mb-1">Why use F-Strings?</h4>
               <ul className="list-disc list-inside space-y-1">
                 <li>Cleaner and more readable syntax</li>
@@ -214,12 +284,9 @@ print(f"The elevation of {location} is {elevation} meters.")`}
           <div className="space-y-8">
             {/* Float Conversion */}
             <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="font-bold text-lg text-gray-800 flex items-center">
-                  <Calculator className="w-5 h-5 mr-2 text-ucd-blue" /> Converting Input to Numbers
-                </h3>
-                <ResourceLink href="https://www.includehelp.com/python/read-input-as-a-float.aspx" text="IncludeHelp: Read Float" />
-              </div>
+              <h3 className="font-bold text-lg text-gray-800 flex items-center mb-2">
+                <Calculator className="w-5 h-5 mr-2 text-ucd-blue" /> Converting Input to Numbers
+              </h3>
               <p className="text-gray-600 text-sm mb-3">
                 Since <code>input()</code> returns text (string), you MUST convert it to a number before doing math. 
                 Use <code>float()</code> for decimals (like coordinates) or <code>int()</code> for whole numbers.
@@ -237,16 +304,16 @@ print(f"Calculated NDVI: {ndvi}")`}
 Enter Red value: 0.1
 Calculated NDVI: 0.7142857142857143`} 
               />
+              <div className="mt-2">
+                <ResourceLink href="https://www.includehelp.com/python/read-input-as-a-float.aspx" text="IncludeHelp: Reading Float Input" />
+              </div>
             </div>
 
             {/* Rounding */}
             <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="font-bold text-lg text-gray-800 flex items-center">
-                  <CheckSquare className="w-5 h-5 mr-2 text-ucd-blue" /> Rounding Numbers
-                </h3>
-                <ResourceLink href="https://www.w3schools.com/python/ref_func_round.asp" text="W3Schools: round()" />
-              </div>
+              <h3 className="font-bold text-lg text-gray-800 flex items-center mb-2">
+                <CheckSquare className="w-5 h-5 mr-2 text-ucd-blue" /> Rounding Numbers
+              </h3>
               <p className="text-gray-600 text-sm mb-3">
                 Use <code>round(number, digits)</code> to keep your output clean.
               </p>
@@ -256,6 +323,9 @@ clean_ndvi = round(0.7142857142857143, 2)
 print(f"Clean NDVI: {clean_ndvi}")`} 
                 output="Clean NDVI: 0.71" 
               />
+              <div className="mt-2">
+                <ResourceLink href="https://www.w3schools.com/python/ref_func_round.asp" text="W3Schools: round() Function" />
+              </div>
             </div>
           </div>
         </Section>
