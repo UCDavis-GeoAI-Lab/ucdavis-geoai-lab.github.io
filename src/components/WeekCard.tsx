@@ -8,7 +8,7 @@ interface WeekCardProps {
 }
 
 const WeekCard = ({ week }: WeekCardProps) => {
-  const isLocked = week.weekNumber > 1
+  const isLocked = week.weekNumber > 2
   
   const cardContent = (
     <motion.div 

@@ -80,7 +80,7 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 mt-2 w-72 bg-ucd-blue rounded-xl shadow-2xl border border-ucd-gold/20 py-2 z-50 overflow-hidden">
                   <div className="max-h-96 overflow-y-auto">
                     {weeks.map((week) => {
-                      const isLocked = week.weekNumber > 1
+                      const isLocked = week.weekNumber > 2
                       if (isLocked) {
                         return (
                           <button
@@ -88,7 +88,7 @@ const Navbar = () => {
                             disabled
                             className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between opacity-60 cursor-not-allowed text-white/70"
                           >
-                            <span className="font-semibold">{week.title}</span>
+                            <span className="font-semibold">Week {week.weekNumber}</span>
                             <Lock className="h-4 w-4 text-white/70" />
                           </button>
                         )
@@ -100,7 +100,7 @@ const Navbar = () => {
                           onClick={handleLinkClick}
                           className="w-full text-left px-4 py-3 transition-colors flex items-center justify-between group hover:bg-white/10 text-white"
                         >
-                          <span className="font-semibold">{week.title}</span>
+                          <span className="font-semibold">Week {week.weekNumber}</span>
                         </Link>
                       )
                     })}
@@ -108,6 +108,16 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            <a
+              href="https://github.com/mohammadrezanarimaniucdavis/ABT182_Advance_GIS_UCDavis/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg hover:bg-white/10 transition-all flex items-center space-x-2"
+              title="Open Issue"
+            >
+              <Github className="h-5 w-5" />
+              <span className="hidden lg:inline">Open Issue</span>
+            </a>
             <a
               href="https://github.com/mohammadrezanarimaniucdavis/ABT182_Advance_GIS_UCDavis"
               target="_blank"
@@ -159,7 +169,7 @@ const Navbar = () => {
             {showWeeksMenu && (
               <div className="pl-4 space-y-1">
                 {weeks.map((week) => {
-                  const isLocked = week.weekNumber > 1
+                  const isLocked = week.weekNumber > 2
                   if (isLocked) {
                     return (
                       <button
@@ -168,7 +178,7 @@ const Navbar = () => {
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between opacity-60 cursor-not-allowed"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span>{week.title}</span>
+                        <span>Week {week.weekNumber}</span>
                         <Lock className="h-4 w-4 text-white/70" />
                       </button>
                     )
@@ -180,12 +190,22 @@ const Navbar = () => {
                       onClick={handleLinkClick}
                       className="block w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center justify-between hover:bg-white/10 active:bg-white/20"
                     >
-                      <span>{week.title}</span>
+                      <span>Week {week.weekNumber}</span>
                     </Link>
                   )
                 })}
               </div>
             )}
+            <a
+              href="https://github.com/mohammadrezanarimaniucdavis/ABT182_Advance_GIS_UCDavis/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-2 rounded-lg hover:bg-white/10 transition-all flex items-center space-x-2"
+              onClick={() => setIsOpen(false)}
+            >
+              <Github className="h-5 w-5" />
+              <span>Open Issue</span>
+            </a>
             <a
               href="https://github.com/mohammadrezanarimaniucdavis/ABT182_Advance_GIS_UCDavis"
               target="_blank"
