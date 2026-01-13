@@ -43,22 +43,23 @@ const Lab1 = () => {
           return <span key={i} className="text-green-400">{line}</span>;
         }
 
-        // Simple tokenization for other parts
-        // This is a basic implementation and not a full lexer
-        const tokens = line.split(/(\s+|[(){}=+\-*/,])/g);
+        // Split by operators, spaces, parentheses, quotes etc. but keep delimiters
+        // Using a more complex regex to handle strings better
+        const tokens = line.split(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\b(?:print|input|float|int|round)\b|\d+(?:\.\d+)?|[(){}=+\-*/,:]|\s+)/g).filter(Boolean);
         
         return (
           <span key={i}>
             {tokens.map((token, j) => {
-              // Strings (basic check for quotes)
+              // Strings
               if (token.startsWith('"') || token.startsWith("'")) return <span key={j} className="text-yellow-300">{token}</span>;
               
               // Numbers
               if (/^\d+(\.\d+)?$/.test(token)) return <span key={j} className="text-blue-300">{token}</span>;
               
-              // Keywords and built-ins
+              // Keywords
               if (['print', 'input', 'float', 'int', 'round'].includes(token)) return <span key={j} className="text-purple-400">{token}</span>;
               
+              // Default text (variables, operators, etc)
               return <span key={j} className="text-gray-100">{token}</span>;
             })}
           </span>
