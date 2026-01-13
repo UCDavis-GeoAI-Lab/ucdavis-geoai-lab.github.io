@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Download, Terminal, Play, Video, ExternalLink, Calculator, Type, FileText, CheckSquare, RefreshCw } from 'lucide-react'
+import { ArrowLeft, Download, Terminal, Play, ExternalLink, Calculator, Type, FileText, CheckSquare, RefreshCw } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import QASection from '../components/QASection'
@@ -246,35 +246,34 @@ print("Satellite:", satellite, "| Total Bands:", bands)`}
 
         {/* 3. F-Strings */}
         <Section title="String Formatting (F-Strings)">
-          <div className="mb-4">
-            <p className="text-gray-600 max-w-2xl mb-2">
+          <div className="mb-6">
+            <p className="text-gray-600 max-w-2xl mb-4">
               F-strings (introduced in Python 3.6) are the modern way to embed variables directly into strings. 
               Prefix your string with <code>f</code> and put variables in curly braces <code>{`{}`}</code>.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <CodeBlock 
-                code={`# GIS Example
-location = "Davis, CA"
-elevation = 16
-
-# Embed variables directly
-print(f"The elevation of {location} is {elevation} meters.")`} 
-                output="The elevation of Davis, CA is 16 meters." 
-              />
-              <div className="mt-2">
-                <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings Guide" />
-              </div>
-            </div>
-            <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800 h-fit">
-              <h4 className="font-bold mb-1">Why use F-Strings?</h4>
+            
+            <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800 mb-6">
+              <h4 className="font-bold mb-2">Why use F-Strings?</h4>
               <ul className="list-disc list-inside space-y-1">
                 <li>Cleaner and more readable syntax</li>
                 <li>Faster than old <code>%</code> formatting</li>
                 <li>Can evaluate expressions like <code>{`{5 * 2}`}</code> directly inside</li>
               </ul>
+            </div>
+          </div>
+
+          <div>
+            <CodeBlock 
+              code={`# GIS Example
+location = "Davis, CA"
+elevation = 16
+
+# Embed variables directly
+print(f"The elevation of {location} is {elevation} meters.")`} 
+              output="The elevation of Davis, CA is 16 meters." 
+            />
+            <div className="mt-2">
+              <ResourceLink href="https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/" text="GeeksForGeeks: F-Strings Guide" />
             </div>
           </div>
         </Section>
