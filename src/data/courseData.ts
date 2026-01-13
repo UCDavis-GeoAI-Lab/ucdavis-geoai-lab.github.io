@@ -128,6 +128,26 @@ export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
     }
   }
   
+  // Week 2: Data Structures
+  if (weekNum === 2) {
+    return {
+      weekNumber: weekNum,
+      title: "Data Structures",
+      description: "Master Python's data structures: Lists, Sets, Dictionaries, and Tuples.",
+      sessions: [
+        {
+          sessionNumber: 1,
+          title: "Lab 2",
+          description: "Data Structures in GIS",
+          topics: ["Lists & Sets", "Dictionaries", "Tuples", "Conditionals"],
+          pythonFeatures: ["List methods", "Set operations", "Dict keys/values", "if/else"],
+          gisRecap: ["Metadata handling", "Data organization"],
+          content: "Access Lab 2 materials here."
+        }
+      ]
+    }
+  }
+  
   // Other weeks have 2 sessions
   return {
     weekNumber: weekNum,
