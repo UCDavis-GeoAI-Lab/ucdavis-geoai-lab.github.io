@@ -5,7 +5,7 @@ import { useState } from 'react'
 import QASection from '../components/QASection'
 
 const Lab1 = () => {
-  const basePath = import.meta.env.PROD ? '/ABT182_Advance_GIS_UCDavis' : ''
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
   const notebookPath = `${basePath}/code/colab/Week1/ABT182_hw1_2026.ipynb`
 
   const handleDownload = () => {

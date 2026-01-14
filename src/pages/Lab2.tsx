@@ -4,7 +4,7 @@ import QASection from '../components/QASection'
 import { CodeBlock, Section, ResourceLink } from '../components/LessonComponents'
 
 const Lab2 = () => {
-  const basePath = import.meta.env.PROD ? '/ABT182_Advance_GIS_UCDavis' : ''
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
   const notebookPath = `${basePath}/code/colab/Week2/ABT182_Lab2_variables_and_statements.ipynb`
 
   const handleDownload = () => {

@@ -155,7 +155,9 @@ ABT182_Advance_GIS_UCDavis/
 
 This website is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
 
-**Live Website:** [https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/](https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/)
+**Live Websites:**
+- **Organization Site:** [https://ucdavis-geoai-lab.github.io/](https://ucdavis-geoai-lab.github.io/)
+- **Mirror:** [https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/](https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/)
 
 ### GitHub Pages Setup
 

@@ -36,8 +36,8 @@ function ScrollToTop() {
 }
 
 function App() {
-  // Use basename only in production (GitHub Pages), not in development
-  const basename = import.meta.env.PROD ? '/ABT182_Advance_GIS_UCDavis' : ''
+  // Use basename from Vite config, removing trailing slash if present
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
   
   return (
     <Router basename={basename}>

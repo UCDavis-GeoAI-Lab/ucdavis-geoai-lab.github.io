@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Trash2, User, Reply, Send, AlertTriangle } from 'lucide-react';
+import { MessageSquare, User, Reply, Send, X, Edit2, Check, Trash2, AlertTriangle } from 'lucide-react';
 import { db } from '../firebase';
 import { 
   collection, 
@@ -8,11 +8,11 @@ import {
   where, 
   orderBy, 
   onSnapshot, 
-  deleteDoc, 
   doc, 
   updateDoc, 
-  arrayUnion, 
-  arrayRemove 
+  arrayUnion,
+  deleteDoc,
+  arrayRemove
 } from 'firebase/firestore';
 
 interface ReplyData {
@@ -35,61 +35,163 @@ interface QASectionProps {
   weekNumber: number;
 }
 
-// Confirmation Modal Component
-interface ConfirmationModalProps {
+// Preview Modal Component
+interface PreviewModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onEdit: () => void;
   onConfirm: () => void;
+  author: string;
+  content: string;
+  isSubmitting: boolean;
   title: string;
-  message: string;
-  isDeleting: boolean;
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ 
+const PreviewModal: React.FC<PreviewModalProps> = ({ 
   isOpen, 
   onClose, 
+  onEdit, 
   onConfirm, 
-  title, 
-  message, 
-  isDeleting 
+  author, 
+  content,
+  isSubmitting,
+  title
 }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-200">
-        <div className="p-6">
-          <div className="flex items-start space-x-4">
-            <div className="bg-red-100 p-3 rounded-full flex-shrink-0">
-              <AlertTriangle className="h-6 w-6 text-red-600" />
+      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in zoom-in duration-200">
+        <div className="p-6 border-b border-gray-100">
+          <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+          <p className="text-sm text-gray-500 mt-1">Please review your submission before posting.</p>
+        </div>
+        
+        <div className="p-6 space-y-5">
+          <div>
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Author Name</span>
+            <div className="mt-1 flex items-center space-x-2 text-gray-900 font-medium">
+              <div className="w-6 h-6 rounded-full bg-ucd-blue/10 flex items-center justify-center text-ucd-blue text-xs">
+                <User className="w-3 h-3" />
+              </div>
+              <span>{author}</span>
             </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-              <p className="text-gray-600 leading-relaxed">{message}</p>
+          </div>
+          
+          <div>
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Content</span>
+            <div className="mt-2 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{content}</p>
             </div>
           </div>
         </div>
+
         <div className="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
           <button
-            onClick={onClose}
-            className="px-4 py-2 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ucd-blue transition-colors"
+            onClick={onEdit}
+            className="px-4 py-2 bg-white text-ucd-blue font-medium rounded-lg border border-ucd-blue hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-colors flex items-center"
+            disabled={isSubmitting}
+          >
+            <Edit2 className="w-4 h-4 mr-2" />
+            Edit
+          </button>
+
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 bg-ucd-blue text-white font-medium rounded-lg hover:bg-ucd-blue-light focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors flex items-center shadow-sm"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                Posting...
+              </>
+            ) : (
+              <>
+                <Check className="w-4 h-4 mr-2" />
+                Confirm Post
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Admin Auth Modal Component
+interface AdminAuthModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onAuth: (password: string) => void;
+}
+
+const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ isOpen, onClose, onAuth }) => {
+  const [password, setPassword] = useState('');
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">Admin Authentication</h3>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-4 py-2 bg-white text-gray-900 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-ucd-blue focus:border-transparent outline-none"
+          placeholder="Enter admin password"
+          autoFocus
+        />
+        <div className="flex justify-end space-x-2">
+          <button onClick={onClose} className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Cancel</button>
+          <button 
+            onClick={() => onAuth(password)}
+            className="px-4 py-2 bg-ucd-blue text-white rounded-lg hover:bg-ucd-blue-dark transition-colors"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Delete Confirmation Modal
+interface DeleteConfirmModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  isDeleting: boolean;
+}
+
+const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ isOpen, onClose, onConfirm, isDeleting }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 border-l-4 border-red-500">
+        <div className="flex items-start mb-4">
+          <AlertTriangle className="h-6 w-6 text-red-500 mr-3 flex-shrink-0" />
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">Confirm Deletion</h3>
+            <p className="text-gray-600 text-sm mt-1">Are you sure you want to delete this item? This action cannot be undone.</p>
+          </div>
+        </div>
+        <div className="flex justify-end space-x-3">
+          <button 
+            onClick={onClose} 
+            className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg border border-gray-300"
             disabled={isDeleting}
           >
             Cancel
           </button>
-          <button
+          <button 
             onClick={onConfirm}
-            className="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors flex items-center"
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center"
             disabled={isDeleting}
           >
-            {isDeleting ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
-                Deleting...
-              </>
-            ) : (
-              'Delete'
-            )}
+            {isDeleting ? 'Deleting...' : 'Delete'}
           </button>
         </div>
       </div>
@@ -99,27 +201,83 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 
 const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
   const [questions, setQuestions] = useState<QuestionData[]>([]);
+  
+  // Form inputs
   const [newQuestion, setNewQuestion] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [replyText, setReplyText] = useState<{ [key: string]: string }>({});
   const [replyAuthor, setReplyAuthor] = useState<{ [key: string]: string }>({});
-  const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
   
-  // Modal state
-  const [modalOpen, setModalOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState<{ type: 'question' | 'reply', id: string, replyData?: ReplyData } | null>(null);
+  // UI State
+  const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Admin State
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAdminAuth, setShowAdminAuth] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+
+  // Deletion State
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    type: 'question' | 'reply';
+    id: string;
+    replyData?: ReplyData;
+  }>({
+    isOpen: false,
+    type: 'question',
+    id: ''
+  });
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Preview Modal State
+  const [previewModal, setPreviewModal] = useState<{
+    isOpen: boolean;
+    type: 'question' | 'reply';
+    author: string;
+    content: string;
+    questionId?: string; 
+  }>({
+    isOpen: false,
+    type: 'question',
+    author: '',
+    content: ''
+  });
+
+  // Admin access secret trigger (triple click on title)
+  const handleTitleClick = () => {
+    if (isAdmin) return;
+    
+    setClickCount(prev => {
+      const newCount = prev + 1;
+      if (newCount === 3) {
+        setShowAdminAuth(true);
+        return 0;
+      }
+      return newCount;
+    });
+
+    // Reset click count after 2 seconds
+    setTimeout(() => setClickCount(0), 2000);
+  };
+
+  const handleAdminAuth = (password: string) => {
+    if (password === 'admin182') { // Simple password for now
+      setIsAdmin(true);
+      setShowAdminAuth(false);
+    } else {
+      alert('Incorrect password');
+    }
+  };
 
   // Load data from Firestore
   useEffect(() => {
-    // Create a query against the collection.
     const q = query(
       collection(db, "questions"),
       where("weekNumber", "==", weekNumber),
       orderBy("createdAt", "desc")
     );
 
-    // Set up a listener for real-time updates
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionsData: QuestionData[] = [];
       snapshot.forEach((doc) => {
@@ -133,10 +291,21 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
     return () => unsubscribe();
   }, [weekNumber]);
 
-  const handleAddQuestion = async (e: React.FormEvent) => {
+  // Handle Question Submission Flow
+  const handleQuestionSubmitClick = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newQuestion.trim() || !authorName.trim()) return;
 
+    setPreviewModal({
+      isOpen: true,
+      type: 'question',
+      author: authorName,
+      content: newQuestion
+    });
+  };
+
+  const confirmPostQuestion = async () => {
+    setIsSubmitting(true);
     try {
       await addDoc(collection(db, "questions"), {
         author: authorName,
@@ -146,55 +315,78 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
         weekNumber: weekNumber
       });
       setNewQuestion('');
+      setPreviewModal({ ...previewModal, isOpen: false });
     } catch (e) {
       console.error("Error adding document: ", e);
       alert("Error posting question. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const handleAddReply = async (questionId: string) => {
+  // Handle Reply Submission Flow
+  const handleReplySubmitClick = (questionId: string) => {
     const text = replyText[questionId];
     const author = replyAuthor[questionId];
     
     if (!text?.trim() || !author?.trim()) return;
 
-    const newReply: ReplyData = {
-      id: Date.now().toString(),
+    setPreviewModal({
+      isOpen: true,
+      type: 'reply',
       author: author,
       content: text,
+      questionId: questionId
+    });
+  };
+
+  const confirmPostReply = async () => {
+    if (!previewModal.questionId) return;
+    
+    setIsSubmitting(true);
+    const newReply: ReplyData = {
+      id: Date.now().toString(),
+      author: previewModal.author,
+      content: previewModal.content,
       createdAt: Date.now()
     };
 
     try {
-      const questionRef = doc(db, "questions", questionId);
+      const questionRef = doc(db, "questions", previewModal.questionId);
       await updateDoc(questionRef, {
         replies: arrayUnion(newReply)
       });
 
-      setReplyText({ ...replyText, [questionId]: '' });
+      setReplyText({ ...replyText, [previewModal.questionId]: '' });
       setActiveReplyId(null);
+      setPreviewModal({ ...previewModal, isOpen: false });
     } catch (e) {
       console.error("Error adding reply: ", e);
       alert("Error posting reply. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const confirmDelete = (type: 'question' | 'reply', id: string, replyData?: ReplyData) => {
-    setItemToDelete({ type, id, replyData });
-    setModalOpen(true);
+  // Deletion Handlers
+  const handleDeleteClick = (type: 'question' | 'reply', id: string, replyData?: ReplyData) => {
+    setDeleteModal({
+      isOpen: true,
+      type,
+      id,
+      replyData
+    });
   };
 
   const handleConfirmDelete = async () => {
-    if (!itemToDelete) return;
-
     setIsDeleting(true);
     try {
-      if (itemToDelete.type === 'question') {
-        await deleteDoc(doc(db, "questions", itemToDelete.id));
-      } else if (itemToDelete.type === 'reply' && itemToDelete.replyData) {
-        const questionRef = doc(db, "questions", itemToDelete.id);
+      if (deleteModal.type === 'question') {
+        await deleteDoc(doc(db, "questions", deleteModal.id));
+      } else if (deleteModal.type === 'reply' && deleteModal.replyData) {
+        const questionRef = doc(db, "questions", deleteModal.id);
         await updateDoc(questionRef, {
-          replies: arrayRemove(itemToDelete.replyData)
+          replies: arrayRemove(deleteModal.replyData)
         });
       }
     } catch (e) {
@@ -202,8 +394,24 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
       alert("Error deleting item. Please try again.");
     } finally {
       setIsDeleting(false);
-      setModalOpen(false);
-      setItemToDelete(null);
+      setDeleteModal({ ...deleteModal, isOpen: false });
+    }
+  };
+
+  // Modal Close Handlers
+  const handleClosePreviewModal = () => {
+    setPreviewModal({ ...previewModal, isOpen: false });
+  };
+
+  const handleEditModal = () => {
+    setPreviewModal({ ...previewModal, isOpen: false });
+  };
+
+  const handleConfirmPreviewModal = () => {
+    if (previewModal.type === 'question') {
+      confirmPostQuestion();
+    } else {
+      confirmPostReply();
     }
   };
 
@@ -219,26 +427,42 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
 
   return (
     <div className="mt-16 border-t border-gray-200 pt-12">
-      <ConfirmationModal 
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+      {/* Modals */}
+      <PreviewModal 
+        isOpen={previewModal.isOpen}
+        onClose={handleClosePreviewModal}
+        onEdit={handleEditModal}
+        onConfirm={handleConfirmPreviewModal}
+        author={previewModal.author}
+        content={previewModal.content}
+        isSubmitting={isSubmitting}
+        title={previewModal.type === 'question' ? 'Confirm Question' : 'Confirm Reply'}
+      />
+
+      <AdminAuthModal 
+        isOpen={showAdminAuth}
+        onClose={() => setShowAdminAuth(false)}
+        onAuth={handleAdminAuth}
+      />
+
+      <DeleteConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
         onConfirm={handleConfirmDelete}
-        title={itemToDelete?.type === 'question' ? 'Delete Question' : 'Delete Reply'}
-        message={itemToDelete?.type === 'question' 
-          ? 'Are you sure you want to delete this question? This action cannot be undone.' 
-          : 'Are you sure you want to delete this reply? This action cannot be undone.'}
         isDeleting={isDeleting}
       />
 
-      <div className="flex items-center space-x-3 mb-8">
-        <MessageSquare className="h-8 w-8 text-ucd-blue" />
-        <h2 className="text-3xl font-bold text-ucd-blue">Q&A Discussion</h2>
+      <div className="flex items-center space-x-3 mb-8 cursor-pointer select-none" onClick={handleTitleClick}>
+        <MessageSquare className={`h-8 w-8 ${isAdmin ? 'text-red-600' : 'text-ucd-blue'}`} />
+        <h2 className={`text-3xl font-bold ${isAdmin ? 'text-red-600' : 'text-ucd-blue'}`}>
+          Q&A Discussion {isAdmin && '(Admin Mode)'}
+        </h2>
       </div>
 
       {/* New Question Form */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-10">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Ask a Question</h3>
-        <form onSubmit={handleAddQuestion} className="space-y-4">
+        <form onSubmit={handleQuestionSubmitClick} className="space-y-4">
           <div>
             <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
             <input
@@ -267,7 +491,7 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
             className="inline-flex items-center px-6 py-2 bg-ucd-blue text-white rounded-lg hover:bg-ucd-blue-dark transition-colors font-medium"
           >
             <Send className="h-4 w-4 mr-2" />
-            Post Question
+            Review & Post
           </button>
         </form>
       </div>
@@ -292,13 +516,15 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
                       <p className="text-xs text-gray-500">{formatDate(question.createdAt)}</p>
                     </div>
                   </div>
-                  <button
-                    onClick={() => confirmDelete('question', question.id)}
-                    className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                    title="Delete question"
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </button>
+                  {isAdmin && (
+                    <button
+                      onClick={() => handleDeleteClick('question', question.id)}
+                      className="text-gray-400 hover:text-red-500 p-1"
+                      title="Delete Question (Admin)"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                  )}
                 </div>
                 
                 <p className="text-gray-800 text-lg mb-6 leading-relaxed">
@@ -342,10 +568,11 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
                         />
                         <div className="flex justify-end">
                           <button
-                            onClick={() => handleAddReply(question.id)}
-                            className="px-4 py-2 bg-ucd-blue text-white text-sm rounded hover:bg-ucd-blue-light transition-colors"
+                            onClick={() => handleReplySubmitClick(question.id)}
+                            className="px-4 py-2 bg-ucd-blue text-white text-sm rounded hover:bg-ucd-blue-light transition-colors flex items-center"
                           >
-                            Post Reply
+                            <Send className="h-3 w-3 mr-2" />
+                            Review Reply
                           </button>
                         </div>
                       </div>
@@ -369,13 +596,15 @@ const QASection: React.FC<QASectionProps> = ({ weekNumber }) => {
                               <span className="font-semibold text-sm text-gray-900">{reply.author}</span>
                               <div className="flex items-center space-x-2">
                                 <span className="text-xs text-gray-500">{formatDate(reply.createdAt)}</span>
-                                <button
-                                  onClick={() => confirmDelete('reply', question.id, reply)}
-                                  className="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
-                                  title="Delete reply"
-                                >
-                                  <Trash2 className="h-3 w-3" />
-                                </button>
+                                {isAdmin && (
+                                  <button
+                                    onClick={() => handleDeleteClick('reply', question.id, reply)}
+                                    className="text-gray-300 hover:text-red-500 transition-colors"
+                                    title="Delete Reply (Admin)"
+                                  >
+                                    <Trash2 className="h-3 w-3" />
+                                  </button>
+                                )}
                               </div>
                             </div>
                             <p className="text-gray-700 text-sm leading-relaxed">{reply.content}</p>
