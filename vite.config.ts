@@ -8,9 +8,9 @@ export default defineConfig(({ command }) => {
     base: '/',
   }
 
-  // Only use the repository name as base path when building for production
+  // For ucdavis-geoai-lab.github.io, the base should be '/'
   if (command !== 'serve') {
-    config.base = '/ABT182_Advance_GIS_UCDavis/'
+    config.base = '/'
   }
 
   return config
