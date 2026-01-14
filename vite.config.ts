@@ -3,15 +3,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  const config = {
+  // Use VITE_BASE_PATH environment variable if set (from GitHub Actions)
+  // Otherwise default to '/' (for local dev or if variable is missing)
+  const basePath = process.env.VITE_BASE_PATH || '/'
+
+  return {
     plugins: [react()],
-    base: '/',
+    base: basePath,
   }
-
-  // For ucdavis-geoai-lab.github.io, the base should be '/'
-  if (command !== 'serve') {
-    config.base = '/'
-  }
-
-  return config
 })
