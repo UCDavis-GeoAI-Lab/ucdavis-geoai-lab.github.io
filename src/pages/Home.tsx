@@ -257,6 +257,16 @@ const Home = () => {
                           (Web Developer)
                         </span>
                       )}
+                      {ta.name === 'Inseon Kim' && (
+                        <span className="text-base sm:text-lg font-normal text-gray-600 ml-2 block sm:inline">
+                          (Content Developer)
+                        </span>
+                      )}
+                      {ta.name === 'Parastoo Farajpoor' && (
+                        <span className="text-base sm:text-lg font-normal text-gray-600 ml-2 block sm:inline">
+                          (Content Developer)
+                        </span>
+                      )}
                     </h3>
                     <p className="text-base sm:text-lg text-gray-700 mb-4">Section {ta.labSection} TA</p>
                     <div className="space-y-2 text-sm sm:text-base text-gray-600">
