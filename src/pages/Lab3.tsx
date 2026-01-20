@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Download, RefreshCw, Database, Repeat, Scissors, CheckSquare, FileText, Image as ImageIcon, ExternalLink, FolderDown } from 'lucide-react'
+import { ArrowLeft, Download, RefreshCw, Database, Repeat, Scissors, CheckSquare, FileText, Image as ImageIcon, FolderDown } from 'lucide-react'
 import QASection from '../components/QASection'
 import { CodeBlock, Section, ResourceLink } from '../components/LessonComponents'
 
