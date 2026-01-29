@@ -563,11 +563,11 @@ def plot_temperature_anomalies(years, temperatures, anomalies, mean_temp, std_te
           </div>
         </Section>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={4} />
-        
         {/* In-Class Q&A Section */}
         <InClassQA weekNumber={4} />
+        
+        {/* Q&A Discussion Section */}
+        <QASection weekNumber={4} />
       </div>
     </div>
   )

@@ -63,11 +63,11 @@ const Week = () => {
           ))}
         </div>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={currentWeekNum} />
-        
         {/* In-Class Q&A Section */}
         <InClassQA weekNumber={currentWeekNum} />
+        
+        {/* Q&A Discussion Section */}
+        <QASection weekNumber={currentWeekNum} />
       </div>
     </div>
   )
