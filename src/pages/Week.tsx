@@ -4,6 +4,7 @@ import { weeks } from '../data/courseData'
 import SessionCard from '../components/SessionCard'
 
 import QASection from '../components/QASection'
+import InClassQA from '../components/InClassQA'
 
 const Week = () => {
   const { weekNumber } = useParams<{ weekNumber: string }>()
@@ -64,6 +65,9 @@ const Week = () => {
 
         {/* Q&A Section */}
         <QASection weekNumber={currentWeekNum} />
+        
+        {/* In-Class Q&A Section */}
+        <InClassQA weekNumber={currentWeekNum} />
       </div>
     </div>
   )

@@ -132,7 +132,7 @@ export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
   if (weekNum === 2) {
     return {
       weekNumber: weekNum,
-      title: "Data Structures",
+      title: `Week ${weekNum}`,
       description: "Master Python's data structures: Lists, Sets, Dictionaries, and Tuples.",
       sessions: [
         {
@@ -143,6 +143,46 @@ export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
           pythonFeatures: ["List methods", "Set operations", "Dict keys/values", "if/else"],
           gisRecap: ["Metadata handling", "Data organization"],
           content: "Access Lab 2 materials here."
+        }
+      ]
+    }
+  }
+  
+  // Week 3: Loops & NumPy Arrays
+  if (weekNum === 3) {
+    return {
+      weekNumber: weekNum,
+      title: "Loops & NumPy Arrays",
+      description: "Master loops, NumPy arrays, and conditional statements to process multispectral imagery.",
+      sessions: [
+        {
+          sessionNumber: 1,
+          title: "Lab 3",
+          description: "Working with Raster Data",
+          topics: ["NumPy Arrays", "For Loops", "List Comprehensions", "Conditionals", "Array Operations"],
+          pythonFeatures: ["Array slicing", "Loop iterations", "Conditional classification", "Statistical operations"],
+          gisRecap: ["Raster processing", "Spectral analysis", "NDVI calculation"],
+          content: "Access Lab 3 materials here."
+        }
+      ]
+    }
+  }
+  
+  // Week 4: Functions & Plotting
+  if (weekNum === 4) {
+    return {
+      weekNumber: weekNum,
+      title: `Week ${weekNum}`,
+      description: "Create reusable functions and professional visualizations for GIS and environmental data analysis.",
+      sessions: [
+        {
+          sessionNumber: 1,
+          title: "Lab 4",
+          description: "Python Functions & Data Visualization",
+          topics: ["Functions", "Line Plots", "Bar Charts", "Scatter Plots", "Heatmaps"],
+          pythonFeatures: ["Function definition", "Matplotlib plotting", "Custom visualizations", "Anomaly detection"],
+          gisRecap: ["NDVI visualization", "Spatial distribution", "Elevation mapping"],
+          content: "Access Lab 4 materials here."
         }
       ]
     }

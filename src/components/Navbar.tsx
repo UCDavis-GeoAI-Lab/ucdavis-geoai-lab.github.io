@@ -80,7 +80,7 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 mt-2 w-72 bg-ucd-blue rounded-xl shadow-2xl border border-ucd-gold/20 py-2 z-50 overflow-hidden">
                   <div className="max-h-96 overflow-y-auto">
                     {weeks.map((week) => {
-                      const isLocked = week.weekNumber > 3
+                      const isLocked = week.weekNumber > 4
                       if (isLocked) {
                         return (
                           <button
@@ -169,7 +169,7 @@ const Navbar = () => {
             {showWeeksMenu && (
               <div className="pl-4 space-y-1">
                 {weeks.map((week) => {
-                  const isLocked = week.weekNumber > 3
+                  const isLocked = week.weekNumber > 4
                   if (isLocked) {
                     return (
                       <button

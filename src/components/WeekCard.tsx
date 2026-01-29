@@ -8,11 +8,11 @@ interface WeekCardProps {
 }
 
 const WeekCard = ({ week }: WeekCardProps) => {
-  const isLocked = week.weekNumber > 3
+  const isLocked = week.weekNumber > 4
   
   const cardContent = (
     <motion.div 
-      className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 card-hover border-l-4 border-ucd-gold relative overflow-hidden h-full flex flex-col ${
+      className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 card-hover border-l-4 border-ucd-gold relative overflow-hidden h-full w-full flex flex-col ${
         isLocked ? 'opacity-75' : ''
       }`}
       whileHover={isLocked ? {} : { scale: 1.03, y: -5 }}
@@ -71,11 +71,11 @@ const WeekCard = ({ week }: WeekCardProps) => {
   )
 
   if (isLocked) {
-    return <div className="cursor-not-allowed h-full">{cardContent}</div>
+    return <div className="cursor-not-allowed h-full w-full">{cardContent}</div>
   }
 
   return (
-    <Link to={`/week/${week.weekNumber}`} className="h-full block">
+    <Link to={`/week/${week.weekNumber}`} className="h-full w-full block">
       {cardContent}
     </Link>
   )

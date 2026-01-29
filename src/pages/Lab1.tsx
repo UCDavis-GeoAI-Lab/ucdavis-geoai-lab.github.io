@@ -3,6 +3,7 @@ import { ArrowLeft, Download, Terminal, Play, ExternalLink, Calculator, Type, Fi
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import QASection from '../components/QASection'
+import InClassQA from '../components/InClassQA'
 
 const Lab1 = () => {
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
@@ -399,6 +400,9 @@ print(f"Clean NDVI: {clean_ndvi}")`}
 
         {/* Q&A Section */}
         <QASection weekNumber={1} />
+        
+        {/* In-Class Q&A Section */}
+        <InClassQA weekNumber={1} />
       </div>
     </div>
   )

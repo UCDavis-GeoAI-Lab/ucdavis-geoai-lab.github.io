@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Download, List, Database, Scissors, CheckSquare, FileText, BarChart, Globe } from 'lucide-react'
 import QASection from '../components/QASection'
+import InClassQA from '../components/InClassQA'
 import { CodeBlock, Section, ResourceLink } from '../components/LessonComponents'
 
 const Lab2 = () => {
@@ -475,6 +476,9 @@ Currencies: ['SGD']`}
 
         {/* Q&A Section */}
         <QASection weekNumber={2} />
+        
+        {/* In-Class Q&A Section */}
+        <InClassQA weekNumber={2} />
       </div>
     </div>
   )

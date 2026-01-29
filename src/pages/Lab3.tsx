@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Download, RefreshCw, Database, Repeat, Scissors, CheckSquare, FileText, Image as ImageIcon, FolderDown } from 'lucide-react'
 import QASection from '../components/QASection'
+import InClassQA from '../components/InClassQA'
 import { CodeBlock, Section, ResourceLink } from '../components/LessonComponents'
 
 const Lab3 = () => {
@@ -792,6 +793,9 @@ plt.show()`}
 
         {/* Q&A Section */}
         <QASection weekNumber={3} />
+        
+        {/* In-Class Q&A Section */}
+        <InClassQA weekNumber={3} />
       </div>
     </div>
   )

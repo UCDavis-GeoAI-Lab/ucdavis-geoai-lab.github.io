@@ -314,14 +314,14 @@ const Home = () => {
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {weeks.map((week, idx) => (
               <motion.div
                 key={week.weekNumber}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="flex h-full"
+                className="flex h-full w-full"
               >
                 <WeekCard week={week} />
               </motion.div>
