@@ -791,11 +791,11 @@ plt.show()`}
           </div>
         </Section>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={3} />
-        
         {/* In-Class Q&A Section */}
         <InClassQA weekNumber={3} />
+        
+        {/* Q&A Discussion Section */}
+        <QASection weekNumber={3} />
       </div>
     </div>
   )

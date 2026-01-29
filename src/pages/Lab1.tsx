@@ -398,11 +398,11 @@ print(f"Clean NDVI: {clean_ndvi}")`}
           </div>
         </Section>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={1} />
-        
         {/* In-Class Q&A Section */}
         <InClassQA weekNumber={1} />
+        
+        {/* Q&A Discussion Section */}
+        <QASection weekNumber={1} />
       </div>
     </div>
   )

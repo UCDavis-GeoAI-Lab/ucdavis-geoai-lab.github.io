@@ -474,11 +474,11 @@ Currencies: ['SGD']`}
           </div>
         </Section>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={2} />
-        
         {/* In-Class Q&A Section */}
         <InClassQA weekNumber={2} />
+        
+        {/* Q&A Discussion Section */}
+        <QASection weekNumber={2} />
       </div>
     </div>
   )
