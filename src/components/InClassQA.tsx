@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Users, Plus, CheckCircle2, Circle, Clock, AlertCircle, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Users, Plus, CheckCircle2, Circle, Clock, X } from 'lucide-react';
 import { db } from '../firebase';
 import { 
   collection, 
@@ -180,20 +180,28 @@ const InClassQA: React.FC<InClassQAProps> = ({ weekNumber }) => {
   }, [weekNumber]);
 
   // Check if admin (triple click on title)
-  const [clickCount, setClickCount] = useState(0);
+  const clickCountRef = useRef(0);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
   const handleTitleClick = () => {
     if (isAdmin) return;
     
-    setClickCount(prev => {
-      const newCount = prev + 1;
-      if (newCount === 3) {
-        setShowAdminAuth(true);
-        return 0;
-      }
-      return newCount;
-    });
-
-    setTimeout(() => setClickCount(0), 2000);
+    // Clear existing timeout
+    if (clickTimeoutRef.current) {
+      clearTimeout(clickTimeoutRef.current);
+    }
+    
+    clickCountRef.current += 1;
+    
+    if (clickCountRef.current === 3) {
+      setShowAdminAuth(true);
+      clickCountRef.current = 0;
+    } else {
+      // Reset count after 2 seconds
+      clickTimeoutRef.current = setTimeout(() => {
+        clickCountRef.current = 0;
+      }, 2000);
+    }
   };
 
   const handleAdminAuth = () => {
