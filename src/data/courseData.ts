@@ -37,8 +37,8 @@ export const instructor: Instructor = {
   title: "Instructor",
   office: "3040 Bainer Hall",
   email: "amoghimi@ucdavis.edu",
-  officeHours: "Tuesday 1:00 PM – 2:00 PM, Thursday 1:00 PM – 2:00 PM, Or by appointment",
-  pronouns: "he/him"
+  officeHours: "Monday 11:00 AM – 12:00 PM, Wednesday 9:00 AM – 10:00 AM",
+  pronouns: "Course Designer"
 }
 
 export const tas: TA[] = [
@@ -152,7 +152,7 @@ export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
   if (weekNum === 3) {
     return {
       weekNumber: weekNum,
-      title: "Loops & NumPy Arrays",
+      title: `Week ${weekNum}`,
       description: "Master loops, NumPy arrays, and conditional statements to process multispectral imagery.",
       sessions: [
         {

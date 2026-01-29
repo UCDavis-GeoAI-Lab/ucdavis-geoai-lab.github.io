@@ -39,7 +39,7 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="overflow-visible"
             >
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-ucd-gold-light to-white" style={{ lineHeight: '1.15', paddingBottom: '0.75rem', paddingTop: '0.25rem' }}>
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-ucd-gold-light to-white break-words max-w-full px-1" style={{ lineHeight: '1.2', paddingBottom: '0.75rem', paddingTop: '0.25rem' }}>
                 Environmental Analysis Using GIS
               </h1>
             </motion.div>
