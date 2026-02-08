@@ -155,18 +155,15 @@ ABT182_Advance_GIS_UCDavis/
 
 This website is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
 
-**Live Website:**
-- **Custom Domain:** [https://geoailab.ucdavis.edu](https://geoailab.ucdavis.edu) _(Pending DNS configuration)_
-- **GitHub Pages:** [https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/](https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/)
+**Live Websites:**
+- **Organization Site:** [https://ucdavis-geoai-lab.github.io/](https://ucdavis-geoai-lab.github.io/) (UC Davis custom domain pending)
+- **Course Site:** [https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/](https://mohammadrezanarimaniucdavis.github.io/ABT182_Advance_GIS_UCDavis/)
 
 ### GitHub Pages Setup
 
 1. The repository uses GitHub Actions for automatic deployment
 2. Builds are triggered on pushes to the `main` branch
-3. Configured with custom domain: `geoailab.ucdavis.edu`
-4. CNAME file included in deployment for UC Davis hosting
-
-For custom domain setup details, see [docs/CUSTOM_DOMAIN_SETUP.md](docs/CUSTOM_DOMAIN_SETUP.md)
+3. The site is deployed to the `gh-pages` branch automatically
 
 ---
 
