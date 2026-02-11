@@ -80,7 +80,7 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 mt-2 w-72 bg-ucd-blue rounded-xl shadow-2xl border border-ucd-gold/20 py-2 z-50 overflow-hidden">
                   <div className="max-h-96 overflow-y-auto">
                     {weeks.map((week) => {
-                      const isLocked = week.weekNumber > 5
+                      const isLocked = week.weekNumber > 6
                       if (isLocked) {
                         return (
                           <button
