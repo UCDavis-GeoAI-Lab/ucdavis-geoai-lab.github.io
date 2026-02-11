@@ -510,11 +510,11 @@ const Lab6 = () => {
           </div>
         </Section>
 
-        {/* Q&A Section */}
-        <QASection weekNumber={6} />
-
         {/* In-Class Q&A */}
         <InClassQA weekNumber={6} />
+
+        {/* Q&A Section */}
+        <QASection weekNumber={6} />
 
       </div>
     </div>
