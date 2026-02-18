@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && npm run copy-404",
+    "build": "npm run copy-code-assets && tsc && vite build && npm run copy-404",
+    "copy-code-assets": "node scripts/copy-code-assets.js",
     "copy-404": "node scripts/copy-404.js",
     "preview": "vite preview",
     "start": "vite"
