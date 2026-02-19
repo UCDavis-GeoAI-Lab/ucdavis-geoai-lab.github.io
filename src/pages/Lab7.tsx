@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, BookOpen, MapPin, Layout, Database, Zap, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Download, BookOpen, MapPin, Layout, Database, Zap, ExternalLink } from 'lucide-react'
 import QASection from '../components/QASection'
 import InClassQA from '../components/InClassQA'
 import { Section, ResourceLink } from '../components/LessonComponents'
@@ -14,6 +14,8 @@ const img = (basePath: string, name: string, alt: string) => (
 
 const Lab7 = () => {
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
+  const tutorialPdfUrl = `${basePath}/code/colab/Week7/Lab_Instruction/Tutorial_Experience Builder.pdf`
+  const assignmentPdfUrl = `${basePath}/code/colab/Week7/Assignment/Assignment - ArcGIS Experience Builder.pdf`
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -35,6 +37,34 @@ const Lab7 = () => {
               <p className="text-xl text-gray-300 max-w-2xl">
                 Create web apps you envision. Build interactive maps and apps with widgets, data, and actions using ArcGIS Experience Builder.
               </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+              <a
+                href={tutorialPdfUrl}
+                download="Tutorial_Experience_Builder.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center bg-ucd-gold hover:bg-white text-ucd-blue px-4 py-3 md:px-6 md:py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full md:w-auto"
+              >
+                <Download className="h-5 w-5 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <div className="text-left min-w-0">
+                  <div className="text-xs uppercase opacity-80">Tutorial</div>
+                  <div className="text-sm md:text-base truncate">PDF</div>
+                </div>
+              </a>
+              <a
+                href={assignmentPdfUrl}
+                download="Assignment_ArcGIS_Experience_Builder.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center bg-ucd-gold hover:bg-white text-ucd-blue px-4 py-3 md:px-6 md:py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full md:w-auto"
+              >
+                <Download className="h-5 w-5 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <div className="text-left min-w-0">
+                  <div className="text-xs uppercase opacity-80">Assignment</div>
+                  <div className="text-sm md:text-base truncate">PDF</div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
