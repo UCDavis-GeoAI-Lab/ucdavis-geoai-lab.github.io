@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Download, Layers, Image as ImageIcon, BarChart2, Database, ExternalLink, Sun } from 'lucide-react'
+import { ArrowLeft, Download, Layers, Database, ExternalLink, Sun } from 'lucide-react'
 import QASection from '../components/QASection'
 import InClassQA from '../components/InClassQA'
 import { CodeBlock, Section, ResourceLink } from '../components/LessonComponents'
