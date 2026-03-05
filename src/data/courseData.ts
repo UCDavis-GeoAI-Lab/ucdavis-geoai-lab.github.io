@@ -267,6 +267,26 @@ export const weeks: Week[] = Array.from({ length: 10 }, (_, i) => {
       ]
     }
   }
+
+  // Week 9: GeoAI – Solar Panel Detection
+  if (weekNum === 9) {
+    return {
+      weekNumber: weekNum,
+      title: `Week ${weekNum}`,
+      description: "Use GeoAI and a pre-trained solar panel detector to find solar panels in NAIP imagery (Davis, CA). No training—inference only.",
+      sessions: [
+        {
+          sessionNumber: 1,
+          title: "Lab 9",
+          description: "GeoAI – Solar Panel Detection Demo",
+          topics: ["GeoAI", "NAIP imagery", "Solar panel detection", "Mask vectorization", "Area filtering", "Visualization"],
+          pythonFeatures: ["geoai", "SolarPanelDetector", "leafmap", "orthogonalize", "add_geometric_properties"],
+          gisRecap: ["Instance segmentation", "Raster masks", "Vector footprints", "Choropleth by area"],
+          content: "Access the Solar Panel Detection demo and Lab 9 materials here."
+        }
+      ]
+    }
+  }
   return {
     weekNumber: weekNum,
     title: `Week ${weekNum}`,
