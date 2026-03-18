@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Week10_Project_Pack</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="abt182-advance-gis-week-10-project-pack">ABT182 Advance GIS: Week 10 Project Pack</h1>
+<p>Start here: a clear project brief, then supporting resources, and finally the rubric that tells you what great looks like.</p>
+<h2 id="abt_hyd_182_project.docx">1) ABT_HYD_182_project.docx</h2>
+<p>This is the foundation. Read it end-to-end once, then re-read the parts that describe data needs, expected outputs, and the workflow you should follow. Python programming has become an indispensable tool in Geographic Information Systems (GIS) and geospatial analysis, primarily due to its ability to efficiently handle and analyze the substantial volume of geospatial data generated daily in various applications. Its versatile libraries and frameworks, such as leafmap, geemap, geopandas, rasterio, and gdal, empower professionals to manipulate, visualize, and interpret this data, leading to insightful decision-making in various fields such as urban planning, environmental conservation, and sustainable agriculture, among many others.</p>
+<p>This project aims to develop and foster your Python programming skills for analyzing geospatial data. The project is worth 20% of the total course grade. The project due date is March 13 at 11:59 PM. The last lab session in week 10 is allocated to the project to finalize your work before the submission.</p>
+<h2 id="learning-objectives">Learning objectives</h2>
+<ul>
+<li><p>Explore various applications of GIS and publicly available geospatial datasets.</p></li>
+<li><p>Learn how to manipulate geospatial datasets (e.g., tabular datasets, raster, and shapefiles) using Python.</p></li>
+<li><p>Explore geoprocessing tools in ArcPy and ArcGIS Pro and identify the appropriate tools for the defined project.</p></li>
+<li><p>Learn how to automate the query process (e.g., spatial query) from a dataset by developing functions in Python.</p></li>
+<li><p>Learn visualization of geospatial datasets in Python.</p></li>
+<li><p>Foster your GIS and teamwork skills.</p></li>
+</ul>
+<h2 id="form-a-project-group">Form a project group</h2>
+<p>The project can be undertaken in a group of three or four. Collaboration with other fellows will provide an opportunity for you to practice and foster your teamwork skills, such as communication, leadership, collaboration, listening, time management, problem solving, and critical thinking – all required to work toward the project’s objectives in a more efficient and effective manner. In addition, a fewer number of projects enables the instruction team to provide timely constructive feedback. Nonetheless, under specific circumstances, individual project work may be permitted.</p>
+<p>You may use the Canvas and/or Piazza discussion pages to share your areas of interest and form a group. In addition, please feel free to discuss the project’s progress or limitations/problems you might face to seek advice/help/feedback from others.</p>
+<p>Once your team is formed, please enter the names of the group members in our shared Google Sheet on Canvas under the Project module.</p>
+<p><a href="https://docs.google.com/spreadsheets/d/1CGfTMb0hijTZtqQRDqMCkpdYH50y_iaXopJzp24DrDU/edit?usp=sharing"><u>https://docs.google.com/spreadsheets/d/1CGfTMb0hijTZtqQRDqMCkpdYH50y_iaXopJzp24DrDU/edit?u</u></a> <a href="https://docs.google.com/spreadsheets/d/1CGfTMb0hijTZtqQRDqMCkpdYH50y_iaXopJzp24DrDU/edit?usp=sharing"><u>sp=sharing</u></a></p>
+<h3 id="project-description">Project Description</h3>
+<p>Once you form your group, explore the wide range of GIS applications in various domains based on your team’s interests. You can define your project at your discretion and interest in any field, such as climate change, ecology, agriculture, urban planning, marketing, geography, environmental management, environmental justice, and engineering. While you are exploring various topics and problems, think of the following questions:</p>
+<ul>
+<li><p>Why is this topic important? (motivation and significance)</p></li>
+<li><p>Do we have access to all the datasets we need for this project? Do they need any preprocessing or data cleaning?</p></li>
+<li><p>What type of geospatial analysis is required, and what geoprocessing packages in Python or tools in ArcGIS Pro can be used for this purpose? (Think about the degree of complexity and the required time)</p></li>
+<li><p><strong>Requirement</strong>: most of the project should be done in Python, either in Google Colab (or any other Python IDE) or in ArcGIS Pro notebook. You may only use ArcGIS Pro (or QGIS) for some parts of the projects, such as creating a map, performing visualizations, or applying projections.</p></li>
+<li><p>Once you are done with the coding, please run the entire notebook so you get the results from</p></li>
+</ul>
+<blockquote>
+<p>each code cell. To run the entire code cells, go to ‘Runtime’ tab and click on ‘Run all’.</p>
+</blockquote>
+<ul>
+<li><p>You need to submit the notebook and the report (pdf or word file) on the Canvas page for this project.</p></li>
+<li><p>You should also <strong>zip</strong> and <strong>upload</strong> all the project files (including reports, python scripts as *.py or</p></li>
+</ul>
+<blockquote>
+<p>*.ipynb, ArcGIS Pro project as *.aprx, if you happen to use ArcGIS Pro, and geospatial datasets) via <strong>Box</strong> Drive (<a href="https://ucdavis.app.box.com/f/c65b0bac2fe14ff2aefbae7bf46533ad"><u>https://ucdavis.app.box.com/f/c65b0bac2fe14ff2aefbae7bf46533ad</u></a>).</p>
+</blockquote>
+<ul>
+<li><p>Each team member should submit their notebook <u>individually</u> on Canvas. However, one group member should upload all the files via Box.</p></li>
+<li><p>Instructions on how to name the folder we upload via Box: please use the team number (based on the Google Sheet) and the last name of the group members in alphabetical order, separated by an underscore. For example, for a group with three people with the instructor team’s family names is:</p></li>
+</ul>
+<h3 id="team1_farajpoor_kim_moghimi_narimani.zip">“team1_farajpoor_kim_moghimi_narimani.zip”</h3>
+<p><strong>NOTE</strong>: if you are a graduate student, you may want to define a project aligned with your thesis/dissertation.</p>
+<h3 id="project-submission">Project Submission</h3>
+<p>Once the project is completed, it should be submitted via Canvas before the due date (March 13, 11:59 PM). The submitted project has three main components:</p>
+<ul>
+<li><p>Project report as a PDF or Word file on <strong>Canvas</strong>.</p></li>
+<li><p>Project codes/notebooks on <strong>Canvas</strong>.</p></li>
+<li><p>Project files (all files, including reports, python scripts as *.py or *.ipynb, ArcGIS Pro project as</p></li>
+</ul>
+<blockquote>
+<p>*.aprx, if you happen to use ArcGIS Pro, and geospatial datasets) via <strong>Box with the following link:</strong></p>
+</blockquote>
+<p><a href="https://ucdavis.app.box.com/f/c65b0bac2fe14ff2aefbae7bf46533ad"><u>https://ucdavis.app.box.com/f/c65b0bac2fe14ff2aefbae7bf46533ad</u></a></p>
+<h4 id="project-report">Project report</h4>
+<blockquote>
+<p>The project report is a four-page (single-space) report (a 3-5 page report including the cover page is acceptable) with the following outline:</p>
+</blockquote>
+<ul>
+<li><p>Cover page (the first page)</p>
+<ul>
+<li><p>Title of the project</p></li>
+<li><p>Name of the team members</p></li>
+<li><p>Lab session for team members</p></li>
+<li><p>Optional: a figure/map related to the project</p></li>
+</ul></li>
+<li><p>Motivation/significance of the project</p>
+<ul>
+<li>Why is this project important?</li>
+</ul></li>
+<li><p>Objective(s)</p>
+<ul>
+<li>What is your main goal in this project?</li>
+</ul></li>
+<li><p>Approach/methodologies</p>
+<ul>
+<li><p>List of datasets used in the project</p></li>
+<li><p>Source of the datasets (a link to download the dataset)</p></li>
+<li><p>List of preprocessing, if any</p></li>
+<li><p>Describe the geospatial analysis</p>
+<ul>
+<li><p>What geospatial processing package/tools did you use?</p></li>
+<li><p>Workflow of your spatial analysis in Python</p></li>
+<li><p>Description of the functions you developed and their inputs and outputs</p></li>
+<li><p>What setting did you use and why? For example, what setting did you use for the Python packages and methods used in your project?</p></li>
+</ul></li>
+</ul></li>
+<li><p>Results</p>
+<ul>
+<li><p>Interpretation of the results</p></li>
+<li><p>Share your observations</p></li>
+<li><p>What does the map tell us?</p></li>
+<li><p>Did you meet the objective(s) you had defined?</p></li>
+</ul></li>
+<li><p>Future work and potential limitations</p>
+<ul>
+<li><p>What limitations did you have during the project, if any?</p></li>
+<li><p>What would you do in the future to improve the project?</p></li>
+</ul></li>
+</ul>
+<h4 id="python-codes">Python codes</h4>
+<ul>
+<li>Your codes are expected to be clean, readable, and with comments explaining what each cell (or line of code) does. Python scripts can be submitted as *.py file or *.ipynb.</li>
+</ul>
+<h3 id="genai-use-policy">GenAI Use Policy</h3>
+<p>For the final group project<strong>,</strong> you may use Generative AI (GenAI) tools (e.g., ChatGPT, GitHub Copilot, Google Gemini) to support your work, provided they are used <strong><u>responsibly and transparently</u></strong>.</p>
+<p>Examples of acceptable uses include (but are not limited to):</p>
+<ul>
+<li><p>Brainstorming analysis approaches or workflows</p></li>
+<li><p>Generating example or starter code that is modified, understood, and extended by the group</p></li>
+<li><p>Debugging or explaining errors</p></li>
+<li><p>Improving code documentation or readability</p></li>
+</ul>
+<p>Please note that GenAI should be treated as a support tool<strong>,</strong> not a replacement for understanding or original work.</p>
+<h4 id="required-disclosure">Required Disclosure</h4>
+<p>If your group uses any GenAI tool, you <strong><u>must include an AI Use Disclosure section</u></strong> in your final report or notebook that clearly states:</p>
+<ol type="1">
+<li><p>Which tool(s) were used</p></li>
+<li><p>How they were used (e.g., code generation, debugging, explanation, visualization help)</p></li>
+<li><p>Which parts of the project were supported by GenAI</p></li>
+<li><p>How the group verified, modified, and understood the AI-generated output Failure to disclose the use of GenAI will be treated as a violation of academic integrity. <strong><em>Expectations When Using GenAI</em></strong></p></li>
+</ol>
+<p>Using GenAI raises expectations for the final project. Projects that use GenAI are expected to demonstrate:</p>
+<ul>
+<li><p>Greater analytical depth</p></li>
+<li><p>More detailed methodology explanations</p></li>
+<li><p>Well-commented, well-structured, and customized code</p></li>
+<li><p>Clear geospatial reasoning and interpretation of results</p></li>
+<li><p>Evidence that all group members understand and can explain the analysis and code</p></li>
+</ul>
+<p>Simply submitting AI-generated code without meaningful modification, explanation, or insight will result in lower credit, even if the code runs correctly.</p>
+<h4 id="prohibited-uses">Prohibited Uses</h4>
+<p>The following are not allowed<strong>:</strong></p>
+<ul>
+<li><p>Submitting AI-generated code or text without understanding it</p></li>
+<li><p>Using GenAI to complete the project with minimal human contribution</p></li>
+<li><p>Misrepresenting AI-generated work as entirely your own</p></li>
+<li><p>Using GenAI to bypass learning objectives or required analysis</p></li>
+</ul>
+<h4 id="accountability">Accountability</h4>
+<p>All group members are responsible for the integrity and understanding of the final submission. You may be asked to explain your code, methods, and results<strong>,</strong> regardless of whether GenAI was used.</p>
+<h3 id="examples-of-project-topics-and-reports">Examples of project topics and reports</h3>
+<p>Examples of project reports for previous years: <a href="https://ucdavis.box.com/s/9g3e892vig6abtajivm05t59w9m1ofjs"><u>https://ucdavis.box.com/s/9g3e892vig6abtajivm05t59w9m1ofjs</u></a></p>
+<h2 id="suggested-timeline">Suggested timeline</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 3</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 4</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 5</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 6</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 7</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 8</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 9</strong>
+</p>
+</blockquote>
+</th>
+<th>
+<blockquote>
+<p>
+<strong>week 10</strong>
+</p>
+</blockquote>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<blockquote>
+<p>
+<strong>Form a group</strong>
+</p>
+</blockquote>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<blockquote>
+<p>
+<strong>Define a problem</strong>
+</p>
+</blockquote>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<blockquote>
+<p>
+<strong>Geospatial analysis in Python</strong>
+</p>
+</blockquote>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<blockquote>
+<p>
+<strong>Finalizing and submission</strong>
+</p>
+</blockquote>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>List of resources for GIS datasets</strong></p>
+<ol type="1">
+<li><p>ArcGIS Living Atlas of the World <a href="https://livingatlas.arcgis.com/en/browse/#d%3D2"><u>https://livingatlas.arcgis.com/en/browse/#d=2</u></a></p>
+<ul>
+<li>you may filter them based on time, region, and content types.</li>
+</ul></li>
+<li><p>Earth Engine Data Catalog <a href="https://developers.google.com/earth-engine/datasets"><u>https://developers.google.com/earth-engine/datasets</u></a></p></li>
+<li><p>GIS (Geographic Information Systems): California &amp; Bay Area GIS Data <a href="https://guides.lib.berkeley.edu/gis/California"><u>https://guides.lib.berkeley.edu/gis/California</u></a></p></li>
+<li><p>California GIS data</p></li>
+</ol>
+<blockquote>
+<p><a href="https://gis.data.ca.gov/"><u>https://gis.data.ca.gov/</u></a> <a href="https://datausa.io/profile/geo/california"><u>https://datausa.io/profile/geo/california</u></a></p>
+</blockquote>
+<ol start="5" type="1">
+<li>Yolo County GIS datasets</li>
+</ol>
+<blockquote>
+<p><a href="https://yodata-yolo.opendata.arcgis.com/"><u>https://yodata-yolo.opendata.arcgis.com/</u></a></p>
+</blockquote>
+<ol start="6" type="1">
+<li><p>City of Davis GIS datasets <a href="http://maps.cityofdavis.org/library/"><u>http://maps.cityofdavis.org/library/</u></a></p></li>
+<li><p>Sacramento</p></li>
+</ol>
+<blockquote>
+<p><a href="https://data.cityofsacramento.org/"><u>https://data.cityofsacramento.org/</u></a></p>
+</blockquote>
+<ol start="8" type="1">
+<li>Other cities</li>
+</ol>
+<blockquote>
+<p><a href="https://libguides.csun.edu/gis/california"><u>https://libguides.csun.edu/gis/california</u></a></p>
+</blockquote>
+<h2 id="list-of-resources-for-geospatial-processing-in-python">List of resources for geospatial processing in Python</h2>
+<ul>
+<li>ArcGIS API for Python <a href="https://developers.arcgis.com/python/"><u>https://developers.arcgis.com/python/</u></a></li>
+</ul>
+<h3 id="examples-of-python-scripts-for-geospatial-analysis">Examples of Python scripts for geospatial analysis</h3>
+<ul>
+<li><p>Suitability Analysis in Python <a href="https://michaelminn.net/tutorials/python-suitability/index.html"><u>https://michaelminn.net/tutorials/python-suitability/index.html</u></a></p></li>
+<li><p>Historical Wildfire Analysis <a href="https://developers.arcgis.com/python/samples/historical-wildfire-analysis/"><u>https://developers.arcgis.com/python/samples/historical-wildfire-analysis/</u></a></p></li>
+<li><p>Safe Streets to Schools <a href="https://developers.arcgis.com/python/samples/safe-streets-to-schools/"><u>https://developers.arcgis.com/python/samples/safe-streets-to-schools/</u></a></p></li>
+<li><p>Automate Building Footprint Extraction using Deep learning <a href="https://developers.arcgis.com/python/samples/automate-building-footprint-extraction-using-instance-segmentation/"><u>https://developers.arcgis.com/python/samples/automate-building-footprint-extraction-using-</u></a> <a href="https://developers.arcgis.com/python/samples/automate-building-footprint-extraction-using-instance-segmentation/"><u>instance-segmentation/</u></a></p></li>
+<li><p>Crime analysis and clustering using geoanalytics and pyspark.ml <a href="https://developers.arcgis.com/python/samples/crime-analysis-and-clustering-using-geoanalytics-and-pyspark/"><u>https://developers.arcgis.com/python/samples/crime-analysis-and-clustering-using-</u></a> <a href="https://developers.arcgis.com/python/samples/crime-analysis-and-clustering-using-geoanalytics-and-pyspark/"><u>geoanalytics-and-pyspark/</u></a></p></li>
+<li><p>Pawnee Fire Analysis</p></li>
+</ul>
+<blockquote>
+<p><a href="https://developers.arcgis.com/python/samples/wildfire-analysis-using-sentinel-2-imagery/"><u>https://developers.arcgis.com/python/samples/wildfire-analysis-using-sentinel-2-imagery/</u></a></p>
+</blockquote>
+<ul>
+<li><p>Network Analysis: Investigate Chennai Floods <a href="https://developers.arcgis.com/python/samples/track-river-pollutants/"><u>https://developers.arcgis.com/python/samples/track-river-pollutants/</u></a></p></li>
+<li><p>Information extraction from Madison city crime incident reports using Deep Learning <a href="https://developers.arcgis.com/python/samples/information-extraction-from-madison-city-crime-incident-reports-using-deep-learning/"><u>https://developers.arcgis.com/python/samples/information-extraction-from-madison-city-</u></a> <a href="https://developers.arcgis.com/python/samples/information-extraction-from-madison-city-crime-incident-reports-using-deep-learning/"><u>crime-incident-reports-using-deep-learning/</u></a></p></li>
+<li><p><strong>More examples can be found here:</strong> <a href="https://developers.arcgis.com/python/samples/"><u>https://developers.arcgis.com/python/samples/</u></a></p></li>
+</ul>
+<blockquote>
+<p>Please explore various projects listed below each category on the left panel. For instance, check</p>
+<p>all the projects listed under ‘GIS analysis and data scientists’.</p>
+</blockquote>
+<h3 id="examples-of-potential-topics-for-the-project">Examples of potential topics for the project</h3>
+<p>NOTE: the following projects are mostly done in ArcGIS Pro, but you can use ArcPy or any other Python packages for your project to accomplish the same objectives.</p>
+<ul>
+<li>Creating wildfire heatmap using Density toolset</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://livingatlas.arcgis.com/en/browse/?q=fire%23d%3D2&amp;q=fire"><u>https://livingatlas.arcgis.com/en/browse/?q=fire#d=2&amp;q=fire</u></a></p>
+</blockquote>
+<ul>
+<li>Analyzing COVID-19 risk using ArcGIS Pro</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/analyze-covid-19-risk-using-arcgis-pro/"><u>https://learn.arcgis.com/en/projects/analyze-covid-19-risk-using-arcgis-pro/</u></a></p>
+</blockquote>
+<ul>
+<li>Identify groundwater vulnerable areas</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/identify-groundwater-vulnerable-areas/"><u>https://learn.arcgis.com/en/projects/identify-groundwater-vulnerable-areas/</u></a></p>
+</blockquote>
+<ul>
+<li>Calculate impervious surfaces in <strong>Davis</strong> from spectral imagery</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/calculate-impervious-surfaces-from-spectral-imagery/"><u>https://learn.arcgis.com/en/projects/calculate-impervious-surfaces-from-</u></a> <a href="https://learn.arcgis.com/en/projects/calculate-impervious-surfaces-from-spectral-imagery/">spectral-imagery/</a></p>
+</blockquote>
+<ul>
+<li>Identifying gaps in wheat production</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/identify-gaps-in-wheat-production/" class="uri">https://learn.arcgis.com/en/projects/identify-gaps-in-wheat-production/</a></p>
+</blockquote>
+<ul>
+<li>Determine the most dangerous roads for drivers</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/determine-the-most-dangerous-roads-for-drivers/"><u>https://learn.arcgis.com/en/projects/determine-the-most-dangerous-roads-for-</u></a></p>
+<p><a href="https://learn.arcgis.com/en/projects/determine-the-most-dangerous-roads-for-drivers/"><u>drivers/</u></a></p>
+</blockquote>
+<ul>
+<li>Automate fire damage assessment with deep learning</li>
+</ul>
+<blockquote>
+<p>Related website:<a href="https://learn.arcgis.com/en/projects/automate-fire-damage-assessment-with-deep-learning/"><u>https://learn.arcgis.com/en/projects/automate-fire-damage-assessment-with-</u></a> <a href="https://learn.arcgis.com/en/projects/automate-fire-damage-assessment-with-deep-learning/"><u>deep-learning/</u></a></p>
+</blockquote>
+<ul>
+<li>Monitor forest change over time</li>
+</ul>
+<blockquote>
+<p>Related website: <a href="https://learn.arcgis.com/en/projects/monitor-forest-change-over-time/"><u>https://learn.arcgis.com/en/projects/monitor-forest-change-over-time/</u></a></p>
+</blockquote>
+<h2 id="more_resources_for_project.docx">2) More_resources_for_project.docx</h2>
+<p>Use this section as your toolbox. When you get stuck, come back here for examples, hints, and guidance that make your implementation smoother and faster. &gt; <img src="media/image1.jpeg" style="width:5.44754in;height:7.5688in" />App_01_Table &gt; &gt; <img src="media/image2.jpeg" style="width:5.7294in;height:7.62747in" />App_02_Table &gt; &gt; <img src="media/image3.jpeg" style="width:5.43352in;height:7.5688in" />App_03_Table &gt; &gt; <img src="media/image4.jpeg" style="width:5.5534in;height:7.5688in" />App_04_Table &gt; &gt; <img src="media/image5.jpeg" style="width:5.43352in;height:7.5688in" />App_05_TableA &gt; &gt; <img src="media/image6.jpeg" style="width:5.66947in;height:7.5688in" />App_05_TableB &gt; &gt; App_05_TableC</p>
+<p><img src="media/image7.jpeg" style="width:9.9732in;height:4.25833in" /></p>
+<blockquote>
+<p>App_06_TableA</p>
+</blockquote>
+<p><img src="media/image8.png" style="width:8.01541in;height:7.425in" /></p>
+<blockquote>
+<p><img src="media/image9.jpeg" style="width:5.33883in;height:7.5688in" />App_06_TableB</p>
+<p>App_06_TableC</p>
+</blockquote>
+<p><img src="media/image10.jpeg" style="width:9.97461in;height:3.96667in" /></p>
+<h2 id="rubric_for_gis_project.doc">3) Rubric_for_GIS_project.doc</h2>
+<p>Now switch into reviewer mode. The rubric is your checklist: aim for the criteria early so you do not discover expectations at the last minute. ## ABT/HYD 182</p>
+<p><strong>Scoring Rubrics for</strong> GIS <strong>Project</strong></p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 70%" />
+<col style="width: 11%" />
+</colgroup>
+<tbody>
+<tr>
+<td style="text-align: center;">
+<strong>Category</strong>
+</td>
+<td style="text-align: center;">
+<strong>Scoring Criteria</strong>
+</td>
+<td style="text-align: center;">
+<strong>Total Points</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Topic
+</td>
+<td style="text-align: center;">
+Topic is new, attention-getting, and significant.
+</td>
+<td style="text-align: center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Background/motivation/<br /> significance
+</td>
+<td style="text-align: center;">
+Clear statement about the significance/motivation behind the research (explanation about why this project is important)
+</td>
+<td style="text-align: center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Objectives and goals
+</td>
+<td style="text-align: center;">
+Objectives (or hypotheses) are well presented (clear and reasonable explanation of the main goal(s) of the project)
+</td>
+<td style="text-align: center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Approach/methodologies
+</td>
+<td style="text-align: center;">
+<p>
+A comprehensive explanation of the methodology;
+</p>
+<p>
+The dataset is well described (the source of the dataset and a link to the source; data type (raster, vector, tabular, etc.), time and location of the data, etc.)
+</p>
+<p>
+Pre-processing methods are presented, if any (cleaning the dataset, removing irrelevant data, etc.)
+</p>
+<p>
+Processing workflow is properly described (a flowchart showing all the steps should be sufficient)
+</p>
+</td>
+<td style="text-align: center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Python scripts
+</td>
+<td style="text-align: center;">
+<p>
+Python notebook is clean, readable, and well-documented (notes/comments are added for each cell)
+</p>
+<p>
+Geoprocessing methods are described comprehensively (list of geospatial processing packages that were used; setting used for each function/method and explanation about why this setting was used, a brief explanation of the geoprocessing package/function/method, for instance, what is the input and output of a function, etc.)
+</p>
+</td>
+<td style="text-align: center;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Results
+</td>
+<td style="text-align: center;">
+<p>
+Visuals/maps/figures are well prepared and relevant to the project objectives.
+</p>
+<p>
+The significant findings/results of the project are thoughtfully presented (map(s) are discussed, conclusion(s) is made, the objectives were met or not, etc.)
+</p>
+</td>
+<td style="text-align: center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Future work and potential limitations
+</td>
+<td style="text-align: center;">
+The limitations of the project are discussed (for instance, availability of a dataset); Potential solutions/recommendations are presented to address these limitations.
+</td>
+<td style="text-align: center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Reference
+</td>
+<td style="text-align: center;">
+Appropriate referencing of data/visual/context that is/was not generated by the presenter(s).
+</td>
+<td style="text-align: center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+Project files
+</td>
+<td style="text-align: center;">
+All project files are uploaded into the Box drive folder (e.g., python notebooks, ArcGIS Pro project file as aprx (if any), geospatial datasets).
+</td>
+<td style="text-align: center;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quick-workflow-recommended">Quick workflow (recommended)</h2>
+<ol type="1">
+<li>Read the project brief end-to-end.</li>
+<li>Collect requirements and match them to tools/data.</li>
+<li>Draft your solution.</li>
+<li>Iterate against the rubric.</li>
+</ol>
+</body>
+</html>
